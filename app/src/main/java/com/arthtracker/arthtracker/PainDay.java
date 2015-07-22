@@ -3,7 +3,7 @@ package com.arthtracker.arthtracker;
 import java.util.Date;
 
 class PainDay {
-    private int mDate;
+    private Date mDate;
     private int mFingers;
     private int mThumbs;
     private int mWrists;
@@ -19,7 +19,7 @@ class PainDay {
     public PainDay(){
         //Constructor
     }
-    public void setmDate(int mDate) {
+    public void setmDate(Date mDate) {
         this.mDate = mDate;
     }
 
@@ -67,7 +67,7 @@ class PainDay {
         this.mNotes = mNotes;
     }
 
-    public int getmDate() {
+    public Date getmDate() {
 
         return mDate;
     }

@@ -10,6 +10,7 @@ import android.view.MenuItem;
 import android.support.v7.widget.Toolbar;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 public class MainActivity extends ActionBarActivity{
@@ -57,24 +58,25 @@ public class MainActivity extends ActionBarActivity{
         pain7 = new PainDay();
         pain8 = new PainDay();
         pain9 = new PainDay();
+        Date c = Calendar.getInstance().getTime();
 
-        pain1.setmDate(Calendar.DATE);
+        pain1.setmDate(c);
         pain1.setmOverall(96);
-        pain2.setmDate(Calendar.DATE -1 );
+        pain2.setmDate(c);
         pain2.setmOverall(66);
-        pain3.setmDate(Calendar.DATE - 2);
+        pain3.setmDate(c);
         pain3.setmOverall(33);
-        pain4.setmDate(Calendar.DATE);
+        pain4.setmDate(c);
         pain4.setmOverall(75);
-        pain5.setmDate(Calendar.DATE -1 );
+        pain5.setmDate(c);
         pain5.setmOverall(45);
-        pain6.setmDate(Calendar.DATE - 2);
+        pain6.setmDate(c);
         pain6.setmOverall(78);
-        pain7.setmDate(Calendar.DATE);
+        pain7.setmDate(c);
         pain7.setmOverall(10);
-        pain8.setmDate(Calendar.DATE -1 );
+        pain8.setmDate(c);
         pain8.setmOverall(45);
-        pain9.setmDate(Calendar.DATE - 2);
+        pain9.setmDate(c);
         pain9.setmOverall(13);
         //pain.setmFatigue(2);
         //pain.setmStiffness(4);

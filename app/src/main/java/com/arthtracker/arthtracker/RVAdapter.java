@@ -56,9 +56,9 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.PersonViewHolder> 
 
     @Override
     public void onBindViewHolder(PersonViewHolder personViewHolder, int i) {
-        SimpleDateFormat sdf = new SimpleDateFormat();
+        SimpleDateFormat sdf = new SimpleDateFormat("MMMM dd, yyyy");
         //personViewHolder.fatigue.setText("Fatigue: " + painDays.get(i).getmFatigue());
-        ;
+
         personViewHolder.date.setText(sdf.format(painDays.get(i).getmDate()));
         //personViewHolder.overall.setText(String.valueOf((painDays.get(i).getmOverall())));
         personViewHolder.circle.setTitleText(String.valueOf((painDays.get(i).getmOverall())));
