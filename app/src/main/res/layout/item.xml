@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android" xmlns:card_view="http://schemas.android.com/apk/res-auto"
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:id="@+id/cv"
@@ -11,14 +13,18 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:padding="6dp">
-        <ImageView
+        <com.github.pavlospt.CircleView
+            android:id="@+id/circle"
             android:layout_width="75dp"
             android:layout_height="75dp"
-            android:id="@+id/circle"
-            android:background="@drawable/green_circle"
-            android:layout_gravity="center"
-            android:padding="8dp" />
-
+            app:titleSize="20dp"
+            app:titleColor="@color/black"
+            app:strokeColorValue="@color/green"
+            app:backgroundColorValue="@color/white"
+            app:fillColor="@color/white"
+            app:fillRadius="0.9"
+            app:strokeWidthSize="8"
+            />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -29,20 +35,7 @@
             android:layout_toRightOf="@+id/circle"
             android:layout_marginLeft="6dp"
             />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="75"
-            android:id="@+id/score"
-            android:layout_alignLeft="@+id/circle"
-            android:layout_alignTop="@+id/circle"
-            android:layout_alignRight="@+id/circle"
-            android:layout_alignBottom="@+id/circle"
-            android:textStyle="bold"
-            android:textIsSelectable="true"
-            android:gravity="center"
-            android:textColor="@android:color/primary_text_dark"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Headline" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
