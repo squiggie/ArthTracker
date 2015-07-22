@@ -16,7 +16,15 @@ public class MainActivity extends ActionBarActivity{
     private Toolbar toolbar;
     private List<PainDay> painDays;
     private RecyclerView rv;
-    private PainDay pain;
+    private PainDay pain1;
+    private PainDay pain2;
+    private PainDay pain3;
+    private PainDay pain4;
+    private PainDay pain5;
+    private PainDay pain6;
+    private PainDay pain7;
+    private PainDay pain8;
+    private PainDay pain9;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,14 +48,47 @@ public class MainActivity extends ActionBarActivity{
 
     private void initializeData(){
         painDays = new ArrayList<>();
-        pain = new PainDay();
+        pain1 = new PainDay();
+        pain2 = new PainDay();
+        pain3 = new PainDay();
+        pain4 = new PainDay();
+        pain5 = new PainDay();
+        pain6 = new PainDay();
+        pain7 = new PainDay();
+        pain8 = new PainDay();
+        pain9 = new PainDay();
 
-        pain.setmDate(Calendar.DATE);
-        pain.setmOverall(76);
+        pain1.setmDate(Calendar.DATE);
+        pain1.setmOverall(96);
+        pain2.setmDate(Calendar.DATE -1 );
+        pain2.setmOverall(66);
+        pain3.setmDate(Calendar.DATE - 2);
+        pain3.setmOverall(33);
+        pain4.setmDate(Calendar.DATE);
+        pain4.setmOverall(75);
+        pain5.setmDate(Calendar.DATE -1 );
+        pain5.setmOverall(45);
+        pain6.setmDate(Calendar.DATE - 2);
+        pain6.setmOverall(78);
+        pain7.setmDate(Calendar.DATE);
+        pain7.setmOverall(10);
+        pain8.setmDate(Calendar.DATE -1 );
+        pain8.setmOverall(45);
+        pain9.setmDate(Calendar.DATE - 2);
+        pain9.setmOverall(13);
         //pain.setmFatigue(2);
         //pain.setmStiffness(4);
 
-        painDays.add(pain);
+        painDays.add(pain1);
+        painDays.add(pain2);
+        painDays.add(pain3);
+        painDays.add(pain4);
+        painDays.add(pain5);
+        painDays.add(pain6);
+        painDays.add(pain7);
+        painDays.add(pain8);
+        painDays.add(pain9);
+
 
     }
 

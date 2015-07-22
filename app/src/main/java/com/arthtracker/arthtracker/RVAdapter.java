@@ -1,14 +1,19 @@
 package com.arthtracker.arthtracker;
 
 import android.content.Context;
-import android.support.design.widget.FloatingActionButton;
+import android.graphics.Color;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import java.text.SimpleDateFormat;
 import java.util.List;
+
+import static com.arthtracker.arthtracker.R.color.*;
 
 public class RVAdapter extends RecyclerView.Adapter<RVAdapter.PersonViewHolder> {
     List<PainDay> painDays;
@@ -22,18 +27,18 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.PersonViewHolder> 
     public static class PersonViewHolder extends RecyclerView.ViewHolder {
 
         CardView cv;
-        TextView fatigue;
+        TextView date;
         TextView stiffness;
         TextView overall;
-        FloatingActionButton fab;
+        ImageView circle;
 
         PersonViewHolder(View itemView) {
             super(itemView);
             cv = (CardView)itemView.findViewById(R.id.cv);
             //fatigue = (TextView)itemView.findViewById(R.id.fatigue);
-            //stiffness = (TextView)itemView.findViewById(R.id.stiffness);
-            overall = (TextView)itemView.findViewById(R.id.overall);
-            fab = (FloatingActionButton)itemView.findViewById((R.id.fab));
+            date = (TextView)itemView.findViewById(R.id.date);
+            overall = (TextView)itemView.findViewById(R.id.score);
+            circle = (ImageView)itemView.findViewById((R.id.circle));
         }
     }
 
@@ -51,12 +56,22 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.PersonViewHolder> 
 
     @Override
     public void onBindViewHolder(PersonViewHolder personViewHolder, int i) {
+        SimpleDateFormat sdf = new SimpleDateFormat();
         //personViewHolder.fatigue.setText("Fatigue: " + painDays.get(i).getmFatigue());
-        //personViewHolder.stiffness.setText("Stiffness: " + painDays.get(i).getmStiffness());
-        personViewHolder.overall.setText("Overall: " + painDays.get(i).getmOverall());
-        if (painDays.get(i).getmOverall() > 66){
-            personViewHolder.fab.setBackgroundTintList(context.getResources().getColorStateList(R.color.fabGreen));
+        ;
+        personViewHolder.date.setText(sdf.format(painDays.get(i).getmDate()));
+        personViewHolder.overall.setText(String.valueOf((painDays.get(i).getmOverall())));
+        if (painDays.get(i).getmOverall() <= 33){
+            personViewHolder.circle.setBackground(context.getResources().getDrawable(R.drawable.red_circle));
         }
+        else if ((painDays.get(i).getmOverall() > 33) && (painDays.get(i).getmOverall() <= 66)){
+            personViewHolder.circle.setBackground(context.getResources().getDrawable(R.drawable.yellow_circle));
+            personViewHolder.overall.setTextColor(Color.BLACK);
+        }
+        else{
+            personViewHolder.circle.setBackground(context.getResources().getDrawable(R.drawable.green_circle));
+        }
+
     }
 
     @Override
