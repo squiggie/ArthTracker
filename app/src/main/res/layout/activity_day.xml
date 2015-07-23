@@ -1,0 +1,100 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ScrollView01"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/day_rel_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context="com.arthtracker.arthtracker.Day">
+
+        <include
+            android:id="@+id/app_bar"
+            layout="@layout/app_bar" />
+
+        <DatePicker
+            android:id="@+id/datePicker"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/app_bar"
+            android:layout_centerHorizontal="true"
+            android:calendarViewShown="false"
+            android:datePickerMode="spinner"
+            android:measureAllChildren="true"
+            android:spinnersShown="true" />
+
+        <TextView
+            android:id="@+id/txtFingerPain"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/datePicker"
+            android:padding="8dp"
+            android:text="Finger Pain:"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <TextView
+            android:id="@+id/txtfingerPainScore"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/txtFingerPain"
+            android:layout_alignTop="@+id/txtFingerPain"
+            android:layout_toEndOf="@+id/txtFingerPain"
+            android:layout_toRightOf="@+id/txtFingerPain"
+            android:padding="8dp"
+            android:text="3"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <SeekBar
+            android:id="@+id/fingerSeek"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/txtFingerPain"
+            android:layout_toRightOf="@+id/txtfingerPainScore"
+            android:max="5"
+            android:padding="8dp"
+            android:progress="3"
+            android:progressTint="@color/primaryColorDark"
+            android:thumbTint="@color/primaryColor" />
+
+        <TextView
+            android:id="@+id/txtThumbPain"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/fingerSeek"
+            android:padding="8dp"
+            android:text="Thumb Pain:"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <TextView
+            android:id="@+id/txtThumbPainScore"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/txtThumbPain"
+            android:layout_toRightOf="@+id/txtThumbPain"
+            android:padding="8dp"
+            android:text="3"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <SeekBar
+            android:id="@+id/thumbSeek"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/txtThumbPain"
+            android:max="5"
+            android:padding="8dp"
+            android:progress="3"
+            android:progressTint="@color/primaryColorDark"
+            android:thumbTint="@color/primaryColor" />
+    </RelativeLayout>
+</ScrollView>

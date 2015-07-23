@@ -8,6 +8,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
+
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -123,4 +125,9 @@ public class MainActivity extends ActionBarActivity{
         }
         return super.onOptionsItemSelected(item);
     }
+
+    public void startDay(View view){
+        startActivity(new Intent (this, Day.class));
+    }
 }
+
