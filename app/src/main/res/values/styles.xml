@@ -14,7 +14,7 @@
 
         <!-- android:textColorPrimaryInverse is the  color of the title
              text in the Toolbar, in the Theme.AppCompat.Light theme:  -->
-        <!-- <item name="android:textColorPrimaryInverse">@color/abc_primary_text_material_light</item> -->
+        <!-- <summary_item name="android:textColorPrimaryInverse">@color/abc_primary_text_material_light</summary_item> -->
 
         <!-- android:actionMenuTextColor is the color of the text of
               action (menu) items in the Toolbar, at least in the
@@ -31,7 +31,7 @@
         <!-- This would set the toolbar's background color,
               but setting this also changes the popup menu's background,
               even if we define popupTheme for our <Toolbar> -->
-        <!-- <item name="android:background">@color/color_primary</item> -->
+        <!-- <summary_item name="android:background">@color/color_primary</summary_item> -->
     </style>
 
 </resources>
