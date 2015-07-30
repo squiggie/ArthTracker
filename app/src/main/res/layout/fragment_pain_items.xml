@@ -46,7 +46,8 @@
                 android:paddingLeft="16dp"
                 android:paddingTop="4dp"
                 android:paddingRight="16dp"
-                android:paddingBottom="4dp" />
+                android:paddingBottom="4dp"
+                android:progress="3" />
             <TextView
                 android:id="@+id/tvThumbPain"
                 android:layout_width="wrap_content"
@@ -79,7 +80,8 @@
                 android:paddingLeft="16dp"
                 android:paddingTop="4dp"
                 android:paddingRight="16dp"
-                android:paddingBottom="4dp" />
+                android:paddingBottom="4dp"
+                android:progress="3" />
             <TextView
                 android:id="@+id/tvWristPain"
                 android:layout_width="wrap_content"
@@ -112,7 +114,8 @@
                 android:paddingLeft="16dp"
                 android:paddingTop="4dp"
                 android:paddingRight="16dp"
-                android:paddingBottom="4dp" />
+                android:paddingBottom="4dp"
+                android:progress="3" />
             <TextView
                 android:id="@+id/tvElbowPain"
                 android:layout_width="wrap_content"
@@ -145,7 +148,8 @@
                 android:paddingLeft="16dp"
                 android:paddingTop="4dp"
                 android:paddingRight="16dp"
-                android:paddingBottom="4dp" />
+                android:paddingBottom="4dp"
+                android:progress="3" />
             <TextView
                 android:id="@+id/tvShoulderPain"
                 android:layout_width="wrap_content"
@@ -178,7 +182,8 @@
                 android:paddingLeft="16dp"
                 android:paddingTop="4dp"
                 android:paddingRight="16dp"
-                android:paddingBottom="4dp" />
+                android:paddingBottom="4dp"
+                android:progress="3" />
             <TextView
                 android:id="@+id/tvKneePain"
                 android:layout_width="wrap_content"
@@ -211,7 +216,8 @@
                 android:paddingLeft="16dp"
                 android:paddingTop="4dp"
                 android:paddingRight="16dp"
-                android:paddingBottom="4dp" />
+                android:paddingBottom="4dp"
+                android:progress="3" />
             <TextView
                 android:id="@+id/tvAnklePain"
                 android:layout_width="wrap_content"
@@ -244,7 +250,8 @@
                 android:paddingLeft="16dp"
                 android:paddingTop="4dp"
                 android:paddingRight="16dp"
-                android:paddingBottom="4dp" />
+                android:paddingBottom="4dp"
+                android:progress="3" />
             <TextView
                 android:id="@+id/tvFatigue"
                 android:layout_width="wrap_content"
@@ -277,7 +284,8 @@
                 android:paddingLeft="16dp"
                 android:paddingTop="4dp"
                 android:paddingRight="16dp"
-                android:paddingBottom="4dp" />
+                android:paddingBottom="4dp"
+                android:progress="3" />
             <TextView
                 android:id="@+id/tvStiffness"
                 android:layout_width="wrap_content"
@@ -310,7 +318,8 @@
                 android:paddingLeft="16dp"
                 android:paddingTop="4dp"
                 android:paddingRight="16dp"
-                android:paddingBottom="4dp" />
+                android:paddingBottom="4dp"
+                android:progress="3" />
             <TextView
                 android:id="@+id/tvOverall"
                 android:layout_width="wrap_content"
@@ -343,7 +352,26 @@
                 android:paddingLeft="16dp"
                 android:paddingTop="4dp"
                 android:paddingRight="16dp"
-                android:paddingBottom="4dp" />
+                android:paddingBottom="4dp"
+                android:progress="3" />
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="textMultiLine"
+                android:ems="10"
+                android:id="@+id/notes"
+                android:layout_gravity="center_horizontal|bottom"
+                android:layout_below="@+id/sbOverall"
+                android:layout_alignLeft="@+id/sbOverall"
+                android:layout_alignRight="@+id/sbOverall"
+                android:contentDescription="Notes:"
+                android:editable="true"
+                android:hint="Notes:"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+                android:paddingTop="4dp"
+                android:paddingBottom="4dp"
+                android:minLines="4" />
         </RelativeLayout>
     </ScrollView>
 </FrameLayout>
