@@ -1,0 +1,349 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.arthtracker.arthtracker.fragment_pain_items">
+
+    <ScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/app_bar">
+
+        <RelativeLayout
+            android:id="@+id/rlItems"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
+
+            <TextView
+                android:id="@+id/tvFingerPain"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:text="Finger Pain:"
+                android:padding="4dp" />
+
+            <TextView
+                android:id="@+id/tvFingerPainScore"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@+id/tvFingerPain"
+                android:text="3"
+                android:layout_toRightOf="@+id/tvFingerPain"
+                android:padding="4dp" />
+
+            <SeekBar
+                android:id="@+id/sbFingerPain"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/tvFingerPain"
+                android:longClickable="false"
+                android:max="5"
+                android:paddingLeft="16dp"
+                android:paddingTop="4dp"
+                android:paddingRight="16dp"
+                android:paddingBottom="4dp" />
+            <TextView
+                android:id="@+id/tvThumbPain"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:text="Thumb Pain:"
+                android:padding="4dp"
+                android:layout_below="@+id/sbFingerPain"/>
+
+            <TextView
+                android:id="@+id/tvThumbPainScore"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@+id/tvThumbPain"
+                android:text="3"
+                android:layout_toRightOf="@+id/tvThumbPain"
+                android:padding="4dp" />
+
+            <SeekBar
+                android:id="@+id/sbThumbPain"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/tvThumbPain"
+                android:longClickable="false"
+                android:max="5"
+                android:paddingLeft="16dp"
+                android:paddingTop="4dp"
+                android:paddingRight="16dp"
+                android:paddingBottom="4dp" />
+            <TextView
+                android:id="@+id/tvWristPain"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:text="Wrist Pain:"
+                android:padding="4dp"
+                android:layout_below="@+id/sbThumbPain"/>
+
+            <TextView
+                android:id="@+id/tvWristPainScore"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@+id/tvWristPain"
+                android:text="3"
+                android:layout_toRightOf="@+id/tvWristPain"
+                android:padding="4dp" />
+
+            <SeekBar
+                android:id="@+id/sbWristPain"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/tvWristPain"
+                android:longClickable="false"
+                android:max="5"
+                android:paddingLeft="16dp"
+                android:paddingTop="4dp"
+                android:paddingRight="16dp"
+                android:paddingBottom="4dp" />
+            <TextView
+                android:id="@+id/tvElbowPain"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:text="Elbow Pain:"
+                android:padding="4dp"
+                android:layout_below="@+id/sbWristPain"/>
+
+            <TextView
+                android:id="@+id/tvElbowPainScore"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@+id/tvElbowPain"
+                android:text="3"
+                android:layout_toRightOf="@+id/tvElbowPain"
+                android:padding="4dp" />
+
+            <SeekBar
+                android:id="@+id/sbElbowPain"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/tvElbowPain"
+                android:longClickable="false"
+                android:max="5"
+                android:paddingLeft="16dp"
+                android:paddingTop="4dp"
+                android:paddingRight="16dp"
+                android:paddingBottom="4dp" />
+            <TextView
+                android:id="@+id/tvShoulderPain"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:text="Shoulder Pain:"
+                android:padding="4dp"
+                android:layout_below="@+id/sbElbowPain"/>
+
+            <TextView
+                android:id="@+id/tvShoulderPainScore"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@+id/tvShoulderPain"
+                android:text="3"
+                android:layout_toRightOf="@+id/tvShoulderPain"
+                android:padding="4dp" />
+
+            <SeekBar
+                android:id="@+id/sbShoulderPain"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/tvShoulderPain"
+                android:longClickable="false"
+                android:max="5"
+                android:paddingLeft="16dp"
+                android:paddingTop="4dp"
+                android:paddingRight="16dp"
+                android:paddingBottom="4dp" />
+            <TextView
+                android:id="@+id/tvKneePain"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:text="Knee Pain:"
+                android:padding="4dp"
+                android:layout_below="@+id/sbShoulderPain"/>
+
+            <TextView
+                android:id="@+id/tvKneePainScore"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@+id/tvKneePain"
+                android:text="3"
+                android:layout_toRightOf="@+id/tvKneePain"
+                android:padding="4dp" />
+
+            <SeekBar
+                android:id="@+id/sbKneePain"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/tvKneePain"
+                android:longClickable="false"
+                android:max="5"
+                android:paddingLeft="16dp"
+                android:paddingTop="4dp"
+                android:paddingRight="16dp"
+                android:paddingBottom="4dp" />
+            <TextView
+                android:id="@+id/tvAnklePain"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:text="Ankle Pain:"
+                android:padding="4dp"
+                android:layout_below="@+id/sbKneePain"/>
+
+            <TextView
+                android:id="@+id/tvAnklePainScore"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@+id/tvAnklePain"
+                android:text="3"
+                android:layout_toRightOf="@+id/tvAnklePain"
+                android:padding="4dp" />
+
+            <SeekBar
+                android:id="@+id/sbAnklePain"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/tvAnklePain"
+                android:longClickable="false"
+                android:max="5"
+                android:paddingLeft="16dp"
+                android:paddingTop="4dp"
+                android:paddingRight="16dp"
+                android:paddingBottom="4dp" />
+            <TextView
+                android:id="@+id/tvFatigue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:text="Fatigue:"
+                android:padding="4dp"
+                android:layout_below="@+id/sbAnklePain"/>
+
+            <TextView
+                android:id="@+id/tvFatigueScore"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@+id/tvFatigue"
+                android:text="3"
+                android:layout_toRightOf="@+id/tvFatigue"
+                android:padding="4dp" />
+
+            <SeekBar
+                android:id="@+id/sbFatigue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/tvFatigue"
+                android:longClickable="false"
+                android:max="5"
+                android:paddingLeft="16dp"
+                android:paddingTop="4dp"
+                android:paddingRight="16dp"
+                android:paddingBottom="4dp" />
+            <TextView
+                android:id="@+id/tvStiffness"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:text="Stiffness:"
+                android:padding="4dp"
+                android:layout_below="@+id/sbFatigue"/>
+
+            <TextView
+                android:id="@+id/tvStiffnessScore"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@+id/tvStiffness"
+                android:text="3"
+                android:layout_toRightOf="@+id/tvStiffness"
+                android:padding="4dp" />
+
+            <SeekBar
+                android:id="@+id/sbStiffness"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/tvStiffness"
+                android:longClickable="false"
+                android:max="5"
+                android:paddingLeft="16dp"
+                android:paddingTop="4dp"
+                android:paddingRight="16dp"
+                android:paddingBottom="4dp" />
+            <TextView
+                android:id="@+id/tvOverall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:text="Overall Score:"
+                android:padding="4dp"
+                android:layout_below="@+id/sbStiffness"/>
+
+            <TextView
+                android:id="@+id/tvOverallScore"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@+id/tvOverall"
+                android:text="3"
+                android:layout_toRightOf="@+id/tvOverall"
+                android:padding="4dp" />
+
+            <SeekBar
+                android:id="@+id/sbOverall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/tvOverall"
+                android:longClickable="false"
+                android:max="5"
+                android:paddingLeft="16dp"
+                android:paddingTop="4dp"
+                android:paddingRight="16dp"
+                android:paddingBottom="4dp" />
+        </RelativeLayout>
+    </ScrollView>
+</FrameLayout>

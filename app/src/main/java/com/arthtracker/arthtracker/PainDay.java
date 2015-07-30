@@ -19,6 +19,11 @@ class PainDay {
     public PainDay(){
         //Constructor
     }
+
+    public PainDay (Date date){
+        //retrieve from db
+    }
+
     public void setmDate(Date mDate) {
         this.mDate = mDate;
     }
@@ -114,5 +119,17 @@ class PainDay {
 
     public String getmNotes() {
         return mNotes;
+    }
+
+    public boolean save(){
+        return true;
+    }
+
+    public boolean validate(){
+        return true;
+    }
+
+    public boolean delete (){
+        return true;
     }
 }

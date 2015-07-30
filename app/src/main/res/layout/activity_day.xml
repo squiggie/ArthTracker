@@ -1,13 +1,10 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/day_rel_layout"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.arthtracker.arthtracker.DayActivity"
-    android:focusable="false"
-    android:clickable="false"
-    android:focusableInTouchMode="false">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rlDayMain"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    tools:context="com.arthtracker.arthtracker.DayActivity">
     <include
         android:id="@+id/app_bar"
         layout="@layout/app_bar">
@@ -17,32 +14,34 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/app_bar"
-        android:layout_centerHorizontal="true"
         android:calendarViewShown="false"
         android:datePickerMode="spinner"
         android:measureAllChildren="true"
-        android:spinnersShown="true" />
-    <include
-        android:id="@+id/recyclerView"
-        layout="@layout/recyclerview_activity"
+        android:spinnersShown="true"
+        android:layout_centerHorizontal="true" />
+    <fragment android:name="com.arthtracker.arthtracker.fragment_pain_items"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/datePicker">
-    </include>
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/recyclerView"
-        android:layout_alignRight="@+id/recyclerView"
-        android:layout_marginBottom="16dp"
-        android:layout_marginRight="16dp"
-        android:clickable="true"
-        android:onClick="saveDay"
-        android:src="@android:drawable/ic_menu_save"
-        android:tint="@color/white"
-        android:alpha="100"
-        app:borderWidth="0dp"
-        app:elevation="6dp"
-        app:layout_anchor="@id/day_rel_layout" />
+        android:id="@+id/fragPainItems"
+        android:layout_below="@+id/datePicker"
+        tools:layout="@layout/fragment_pain_items">
+
+    </fragment>
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_alignBottom="@+id/fragPainItems"
+            android:layout_alignRight="@+id/fragPainItems"
+            android:clickable="true"
+            android:onClick="saveDay"
+            android:src="@mipmap/ic_save_white"
+            android:tint="@color/white"
+            app:borderWidth="0dp"
+            app:elevation="6dp"
+            app:layout_anchor="@id/rlDayMain"
+            android:layout_gravity="bottom|right" />
+
 </RelativeLayout>
