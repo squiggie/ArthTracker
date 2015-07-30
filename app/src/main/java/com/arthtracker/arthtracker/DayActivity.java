@@ -5,21 +5,36 @@ import android.support.v4.app.NavUtils;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import org.w3c.dom.Text;
-
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 
-public class DayActivity extends ActionBarActivity implements fragment_pain_items.OnFragmentInteractionListener, SeekBar.OnSeekBarChangeListener{
+public class DayActivity extends ActionBarActivity implements fragment_pain_items.OnFragmentInteractionListener, SeekBar.OnSeekBarChangeListener, DatePicker.OnDateChangedListener{
     private Toolbar toolbar;
     private String[] values;
+    private TextView mtvFingers;
+    private TextView mtvThumbs;
+    private TextView mtvWrists;
+    private TextView mtvElbows;
+    private TextView mtvShoulders;
+    private TextView mtvKnees;
+    private TextView mtvAnkles;
+    private TextView mtvFatigue;
+    private TextView mtvStiffness;
+    private TextView mtvOverall;
+    private DatePicker mDatePicker;
+    private EditText mNotes;
+    private PainDay mPainDay = new PainDay();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,17 +47,26 @@ public class DayActivity extends ActionBarActivity implements fragment_pain_item
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        values = new String[] { "Finger Pain:", "Thumb Pain:", "Wrist Pain:",
-                "Elbow Pain:", "Shoulder Pain:", "Knee Pain:", "Ankle Pain:", "Fatigue:", "Stiffness:", "Overall:"};
-        final ArrayList<String> list = new ArrayList<String>();
-        for (int i = 0; i < values.length; ++i) {
-            list.add(values[i]);
-        }
+        //set scores
+        mtvFingers = (TextView)findViewById(R.id.tvFingerPainScore);
+        mtvThumbs = (TextView)findViewById(R.id.tvThumbPainScore);
+        mtvWrists = (TextView)findViewById(R.id.tvWristPainScore);
+        mtvShoulders = (TextView)findViewById(R.id.tvShoulderPainScore);
+        mtvKnees= (TextView)findViewById(R.id.tvKneePainScore);
+        mtvElbows = (TextView)findViewById(R.id.tvElbowPainScore);
+        mtvAnkles= (TextView)findViewById(R.id.tvAnklePainScore);
+        mtvFatigue = (TextView)findViewById(R.id.tvFatigueScore);
+        mtvStiffness= (TextView)findViewById(R.id.tvStiffnessScore);
+        mtvOverall = (TextView)findViewById(R.id.tvOverallScore);
+        mDatePicker = (DatePicker)findViewById(R.id.datePicker);
+
+        mNotes = (EditText)findViewById(R.id.notes);
 
         setListeners();
     }
 
     private void setListeners(){
+        //SeekBar Listeners
         SeekBar sbFingerPain = (SeekBar)findViewById(R.id.sbFingerPain);
         sbFingerPain.setOnSeekBarChangeListener(this);
         SeekBar sbThumbPain = (SeekBar)findViewById(R.id.sbThumbPain);
@@ -63,7 +87,16 @@ public class DayActivity extends ActionBarActivity implements fragment_pain_item
         sbStiffness.setOnSeekBarChangeListener(this);
         SeekBar sbOverall = (SeekBar)findViewById(R.id.sbOverall);
         sbOverall.setOnSeekBarChangeListener(this);
+
+        //DatePicker Listener
+        Calendar c = Calendar.getInstance();
+        int year = c.get(Calendar.YEAR);
+        int month = c.get(Calendar.MONTH);
+        int day = c.get(Calendar.DAY_OF_MONTH);
+        mDatePicker.init(year,month,day,this);
+        mDatePicker.setMaxDate(new Date().getTime());
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -91,11 +124,15 @@ public class DayActivity extends ActionBarActivity implements fragment_pain_item
     }
 
     public void saveDay(View v){
-        //Create PainDay object
+        //Validate Data
+        if (mPainDay.validate()){
+            //Save to DB
+        }
+        else{
+            Toast.makeText(this,"Oops something went wrong. Try again!",Toast.LENGTH_LONG).show();
+        }
 
-        //Validate Date
 
-        //Save to DB
     }
 
     @Override
@@ -109,44 +146,44 @@ public class DayActivity extends ActionBarActivity implements fragment_pain_item
         switch (id)
         {
             case R.id.sbFingerPain:
-                TextView tv1 = (TextView)findViewById(R.id.tvFingerPainScore);
-                tv1.setText(String.valueOf(progress));
+                mtvFingers.setText(String.valueOf(progress));
+                mPainDay.setmFingers(progress);
                 break;
             case R.id.sbThumbPain:
-                TextView tv2 = (TextView)findViewById(R.id.tvThumbPainScore);
-                tv2.setText(String.valueOf(progress));
+                mtvThumbs.setText(String.valueOf(progress));
+                mPainDay.setmThumbs(progress);
                 break;
             case R.id.sbWristPain:
-                TextView tv3 = (TextView)findViewById(R.id.tvWristPainScore);
-                tv3.setText(String.valueOf(progress));
+                mtvWrists.setText(String.valueOf(progress));
+                mPainDay.setmWrists(progress);
                 break;
             case R.id.sbElbowPain:
-                TextView tv4 = (TextView)findViewById(R.id.tvElbowPainScore);
-                tv4.setText(String.valueOf(progress));
+                mtvElbows.setText(String.valueOf(progress));
+                mPainDay.setmElbows(progress);
                 break;
             case R.id.sbShoulderPain:
-                TextView tv5 = (TextView)findViewById(R.id.tvShoulderPainScore);
-                tv5.setText(String.valueOf(progress));
+                mtvShoulders.setText(String.valueOf(progress));
+                mPainDay.setmShoulders(progress);
                 break;
             case R.id.sbKneePain:
-                TextView tv6 = (TextView)findViewById(R.id.tvKneePainScore);
-                tv6.setText(String.valueOf(progress));
+                mtvKnees.setText(String.valueOf(progress));
+                mPainDay.setmKnees(progress);
                 break;
             case R.id.sbAnklePain:
-                TextView tv7 = (TextView)findViewById(R.id.tvAnklePainScore);
-                tv7.setText(String.valueOf(progress));
+                mtvAnkles.setText(String.valueOf(progress));
+                mPainDay.setmAnkles(progress);
                 break;
             case R.id.sbFatigue:
-                TextView tv8 = (TextView)findViewById(R.id.tvFatigueScore);
-                tv8.setText(String.valueOf(progress));
+                mtvFatigue.setText(String.valueOf(progress));
+                mPainDay.setmFatigue(progress);
                 break;
             case R.id.sbStiffness:
-                TextView tv9 = (TextView)findViewById(R.id.tvStiffnessScore);
-                tv9.setText(String.valueOf(progress));
+                mtvStiffness.setText(String.valueOf(progress));
+                mPainDay.setmStiffness(progress);
                 break;
             case R.id.sbOverall:
-                TextView tv10 = (TextView)findViewById(R.id.tvOverallScore);
-                tv10.setText(String.valueOf(progress));
+                mtvOverall.setText(String.valueOf(progress));
+                mPainDay.setmOverall(progress);
                 break;
         }
     }
@@ -159,5 +196,14 @@ public class DayActivity extends ActionBarActivity implements fragment_pain_item
     @Override
     public void onStopTrackingTouch(SeekBar seekBar) {
 
+    }
+
+    @Override
+    public void onDateChanged(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+        Date d = null;
+        Calendar cal = GregorianCalendar.getInstance();
+        cal.set(year, monthOfYear, dayOfMonth);
+        d = cal.getTime();
+        mPainDay.setmDate(d);
     }
 }
