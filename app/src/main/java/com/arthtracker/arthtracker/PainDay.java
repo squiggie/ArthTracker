@@ -3,6 +3,7 @@ package com.arthtracker.arthtracker;
 import java.util.Date;
 
 class PainDay {
+    private int mID;
     private Date mDate;
     private int mFingers;
     private int mThumbs;
@@ -21,7 +22,7 @@ class PainDay {
     }
 
     public PainDay (Date date){
-        //retrieve from db
+
     }
 
     public void setmDate(Date mDate) {
@@ -131,5 +132,13 @@ class PainDay {
 
     public boolean delete (){
         return true;
+    }
+
+    public int getmID() {
+        return mID;
+    }
+
+    public void setmID(int mID) {
+        this.mID = mID;
     }
 }
