@@ -146,7 +146,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
 
         Cursor cursor = db.query(table_PAINDAY, // a. table
-                COLUMNS, " date > ?", new String[] { String.valueOf(c.getTimeInMillis()/1000) }, null, null, null, null);
+                COLUMNS, " date > ? ORDER BY date ASC", new String[] { String.valueOf(c.getTimeInMillis()/1000) }, null, null, null, null);
 
         // parse all results
         PainDay painDay = null;
