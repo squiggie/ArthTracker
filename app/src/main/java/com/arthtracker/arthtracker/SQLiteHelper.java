@@ -52,28 +52,33 @@ public class SQLiteHelper extends SQLiteOpenHelper {
         this.onCreate(db);
     }
 
-    public void createPainday(PainDay painday) {
+    public boolean createPainday(PainDay painday) {
         SQLiteDatabase db = this.getWritableDatabase();
+        try {
+            // make values to be inserted
+            ContentValues values = new ContentValues();
+            values.put(painday_DATE, String.valueOf(painday.getmDate()));
+            values.put(painday_FINGERS, String.valueOf(painday.getmFingers()));
+            values.put(painday_THUMBS, String.valueOf(painday.getmThumbs()));
+            values.put(painday_WRISTS, String.valueOf(painday.getmWrists()));
+            values.put(painday_ELBOWS, String.valueOf(painday.getmElbows()));
+            values.put(painday_SHOULDERS, String.valueOf(painday.getmShoulders()));
+            values.put(painday_KNEES, String.valueOf(painday.getmKnees()));
+            values.put(painday_ANKLES, String.valueOf(painday.getmAnkles()));
+            values.put(painday_FATIGUE, String.valueOf(painday.getmFatigue()));
+            values.put(painday_STIFFNESS, String.valueOf(painday.getmStiffness()));
+            values.put(painday_OVERALL, String.valueOf(painday.getmOverall()));
+            values.put(painday_NOTES, painday.getmNotes());
 
-        // make values to be inserted
-        ContentValues values = new ContentValues();
-        values.put(painday_DATE,String.valueOf(painday.getmDate()));
-        values.put(painday_FINGERS,String.valueOf(painday.getmFingers()));
-        values.put(painday_THUMBS,String.valueOf(painday.getmThumbs()));
-        values.put(painday_WRISTS,String.valueOf(painday.getmWrists()));
-        values.put(painday_ELBOWS,String.valueOf(painday.getmElbows()));
-        values.put(painday_SHOULDERS,String.valueOf(painday.getmShoulders()));
-        values.put(painday_KNEES,String.valueOf(painday.getmKnees()));
-        values.put(painday_ANKLES,String.valueOf(painday.getmAnkles()));
-        values.put(painday_FATIGUE,String.valueOf(painday.getmFatigue()));
-        values.put(painday_STIFFNESS,String.valueOf(painday.getmStiffness()));
-        values.put(painday_OVERALL,String.valueOf(painday.getmOverall()));
-        values.put(painday_NOTES,painday.getmNotes());
+            db.insert(table_PAINDAY, null, values);
 
-        db.insert(table_PAINDAY, null, values);
-
-        // close database transaction
-        db.close();
+            // close database transaction
+            db.close();
+            return true;
+        }
+        catch (Exception e){
+            return false;
+        }
     }
 
     public PainDay readPainDay(int id) {
@@ -107,7 +112,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
     public List getAllPainDays() {
         List painDays = new LinkedList();
 
-        String query = "SELECT  * FROM " + table_PAINDAY;
+        String query = "SELECT  * FROM ORDER BY date ASC" + table_PAINDAY;
 
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(query, null);
@@ -141,7 +146,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
     public List getCurrentPainDays() {
         List painDays = new LinkedList();
         Calendar c = Calendar.getInstance();
-        c.add(Calendar.DAY_OF_MONTH,-30);
+        c.add(Calendar.DAY_OF_MONTH, -30);
 
         SQLiteDatabase db = this.getWritableDatabase();
 
@@ -172,6 +177,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
         }
         return painDays;
     }
+
     public int updatePainDay(PainDay painDay) {
 
         SQLiteDatabase db = this.getWritableDatabase();
@@ -199,7 +205,6 @@ public class SQLiteHelper extends SQLiteOpenHelper {
         return i;
     }
 
-    // Deleting single painday
     public void deleteBook(PainDay painday) {
         SQLiteDatabase db = this.getWritableDatabase();
 

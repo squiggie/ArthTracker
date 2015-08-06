@@ -3,7 +3,8 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/ArthTracker.iml" filepath="$PROJECT_DIR$/ArthTracker.iml" />
-      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/com.arthtracker.iml" filepath="$PROJECT_DIR$/app/com.arthtracker.iml" />
     </modules>
   </component>
 </project>
+

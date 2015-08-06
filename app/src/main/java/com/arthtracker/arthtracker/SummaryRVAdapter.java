@@ -40,14 +40,14 @@ public class SummaryRVAdapter extends RecyclerView.Adapter<SummaryRVAdapter.Pers
         personViewHolder.notes.setText(painDays.get(i).getmNotes());
         personViewHolder.date.setText(sdf.format(new Date(painDays.get(i).getmDate() * 1000)));
         personViewHolder.circle.setTitleText(String.valueOf((painDays.get(i).getmOverall())));
-        if (painDays.get(i).getmOverall() <= 33){
-            personViewHolder.circle.setStrokeColor(context.getResources().getColor(R.color.red));
+        if (painDays.get(i).getmOverall() <= 2){
+            personViewHolder.circle.setStrokeColor(context.getResources().getColor(R.color.green));
         }
-        else if ((painDays.get(i).getmOverall() > 33) && (painDays.get(i).getmOverall() <= 66)){
+        else if ((painDays.get(i).getmOverall() > 2) && (painDays.get(i).getmOverall() <= 4)){
             personViewHolder.circle.setStrokeColor(context.getResources().getColor(R.color.yellow));
         }
         else{
-            personViewHolder.circle.setStrokeColor(context.getResources().getColor(R.color.green));
+            personViewHolder.circle.setStrokeColor(context.getResources().getColor(R.color.red));
         }
 
     }

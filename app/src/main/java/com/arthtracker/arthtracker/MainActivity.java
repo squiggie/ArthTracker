@@ -75,7 +75,7 @@ public class MainActivity extends ActionBarActivity{
         SQLiteHelper sqlHelper = new SQLiteHelper(this);
         //sqlHelper.onUpgrade(sqlHelper.getWritableDatabase(),1,1);
         painDays = new ArrayList<>();
-        painDays = sqlHelper.getCurrentPainDays();
+        painDays = sqlHelper.getAllPainDays();
     }
 
 }
