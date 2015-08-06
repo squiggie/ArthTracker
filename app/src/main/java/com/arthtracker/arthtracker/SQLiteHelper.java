@@ -112,7 +112,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
     public List getAllPainDays() {
         List painDays = new LinkedList();
 
-        String query = "SELECT  * FROM " + table_PAINDAY + "ORDER BY date ASC";
+        String query = "SELECT  * FROM " + table_PAINDAY + " ORDER BY date DESC";
 
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(query, null);
@@ -151,7 +151,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
 
         Cursor cursor = db.query(table_PAINDAY, // a. table
-                COLUMNS, " date > ? ORDER BY date ASC", new String[] { String.valueOf(c.getTimeInMillis()/1000) }, null, null, null, null);
+                COLUMNS, " date > ? ORDER BY date DESC", new String[] { String.valueOf(c.getTimeInMillis()/1000) }, null, null, null, null);
 
         // parse all results
         PainDay painDay = null;
