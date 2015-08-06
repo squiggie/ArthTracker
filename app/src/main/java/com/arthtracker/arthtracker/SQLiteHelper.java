@@ -112,7 +112,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
     public List getAllPainDays() {
         List painDays = new LinkedList();
 
-        String query = "SELECT  * FROM ORDER BY date ASC" + table_PAINDAY;
+        String query = "SELECT  * FROM " + table_PAINDAY + "ORDER BY date ASC";
 
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(query, null);
