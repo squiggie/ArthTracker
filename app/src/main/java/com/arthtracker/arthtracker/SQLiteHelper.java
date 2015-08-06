@@ -1,5 +1,6 @@
 package com.arthtracker.arthtracker;
 
+import java.util.Calendar;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
@@ -40,14 +41,14 @@ public class SQLiteHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         // SQL statement to create painday table
-        String CREATE_PAINDAY_TABLE = "CREATE TABLE painday ( id INTEGER PRIMARY KEY AUTO_INCREMENT, date DATETIME, fingers INTEGER, thumbs INTEGER, wrists INTEGER, elbows INTEGER, shoulders INTEGER, knees INTEGER, ankles INTEGER, fatigue INTEGER, stiffness INTEGER, overall INTEGER, notes TEXT)";
+        String CREATE_PAINDAY_TABLE = "CREATE TABLE painday ( id INTEGER PRIMARY KEY AUTOINCREMENT, date LONG, fingers INTEGER, thumbs INTEGER, wrists INTEGER, elbows INTEGER, shoulders INTEGER, knees INTEGER, ankles INTEGER, fatigue INTEGER, stiffness INTEGER, overall INTEGER, notes TEXT)";
         db.execSQL(CREATE_PAINDAY_TABLE);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        // drop table if already exists
         db.execSQL("DROP TABLE IF EXISTS painday");
+        // drop table if already exists
         this.onCreate(db);
     }
 
@@ -56,7 +57,6 @@ public class SQLiteHelper extends SQLiteOpenHelper {
 
         // make values to be inserted
         ContentValues values = new ContentValues();
-        values.put(painday_ID,String.valueOf(painday.getmID()));
         values.put(painday_DATE,String.valueOf(painday.getmDate()));
         values.put(painday_FINGERS,String.valueOf(painday.getmFingers()));
         values.put(painday_THUMBS,String.valueOf(painday.getmThumbs()));
@@ -112,6 +112,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(query, null);
 
+
         // parse all results
         PainDay painDay = null;
         if (cursor.moveToFirst()) {
@@ -137,6 +138,40 @@ public class SQLiteHelper extends SQLiteOpenHelper {
         return painDays;
     }
 
+    public List getCurrentPainDays() {
+        List painDays = new LinkedList();
+        Calendar c = Calendar.getInstance();
+        c.add(Calendar.DAY_OF_MONTH,-30);
+
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        Cursor cursor = db.query(table_PAINDAY, // a. table
+                COLUMNS, " date > ?", new String[] { String.valueOf(c.getTimeInMillis()/1000) }, null, null, null, null);
+
+        // parse all results
+        PainDay painDay = null;
+        if (cursor.moveToFirst()) {
+            do {
+                PainDay painday = new PainDay();
+                painday.setmID(cursor.getInt(0));
+                painday.setmDate(cursor.getInt(1));
+                painday.setmFingers(cursor.getInt(2));
+                painday.setmThumbs(cursor.getInt(3));
+                painday.setmWrists(cursor.getInt(4));
+                painday.setmElbows(cursor.getInt(5));
+                painday.setmShoulders(cursor.getInt(6));
+                painday.setmKnees(cursor.getInt(7));
+                painday.setmAnkles(cursor.getInt(8));
+                painday.setmFatigue(cursor.getInt(9));
+                painday.setmStiffness(cursor.getInt(10));
+                painday.setmOverall(cursor.getInt(11));
+                painday.setmNotes(cursor.getString(12));                // Add book to books
+
+                painDays.add(painday);
+            } while (cursor.moveToNext());
+        }
+        return painDays;
+    }
     public int updatePainDay(PainDay painDay) {
 
         SQLiteDatabase db = this.getWritableDatabase();

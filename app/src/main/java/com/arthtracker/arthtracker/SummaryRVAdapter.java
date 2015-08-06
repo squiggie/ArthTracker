@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import com.github.pavlospt.CircleView;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 public class SummaryRVAdapter extends RecyclerView.Adapter<SummaryRVAdapter.PersonViewHolder> {
@@ -35,25 +36,18 @@ public class SummaryRVAdapter extends RecyclerView.Adapter<SummaryRVAdapter.Pers
     @Override
     public void onBindViewHolder(PersonViewHolder personViewHolder, int i) {
         SimpleDateFormat sdf = new SimpleDateFormat("MMMM dd, yyyy");
-        //personViewHolder.fatigue.setText("Fatigue: " + painDays.get(i).getmFatigue());
 
-        personViewHolder.date.setText(sdf.format(painDays.get(i).getmDate()));
-        //personViewHolder.overall.setText(String.valueOf((painDays.get(i).getmOverall())));
+        personViewHolder.notes.setText(painDays.get(i).getmNotes());
+        personViewHolder.date.setText(sdf.format(new Date(painDays.get(i).getmDate() * 1000)));
         personViewHolder.circle.setTitleText(String.valueOf((painDays.get(i).getmOverall())));
         if (painDays.get(i).getmOverall() <= 33){
-            //personViewHolder.circle.setBackground(context.getResources().getDrawable(R.drawable.red_circle));
             personViewHolder.circle.setStrokeColor(context.getResources().getColor(R.color.red));
         }
         else if ((painDays.get(i).getmOverall() > 33) && (painDays.get(i).getmOverall() <= 66)){
-            //personViewHolder.circle.setBackground(context.getResources().getDrawable(R.drawable.yellow_circle));
-            //personViewHolder.overall.setTextColor(Color.BLACK);
             personViewHolder.circle.setStrokeColor(context.getResources().getColor(R.color.yellow));
-
         }
         else{
-            //personViewHolder.circle.setBackground(context.getResources().getDrawable(R.drawable.green_circle));
             personViewHolder.circle.setStrokeColor(context.getResources().getColor(R.color.green));
-
         }
 
     }
@@ -67,17 +61,15 @@ public class SummaryRVAdapter extends RecyclerView.Adapter<SummaryRVAdapter.Pers
 
         CardView cv;
         TextView date;
-        TextView stiffness;
-        TextView overall;
+        TextView notes;
         CircleView circle;
 
         PersonViewHolder(View itemView) {
             super(itemView);
             cv = (CardView)itemView.findViewById(R.id.cv);
-            //fatigue = (TextView)itemView.findViewById(R.id.fatigue);
             date = (TextView)itemView.findViewById(R.id.date);
-            //overall = (TextView)itemView.findViewById(R.id.score);
             circle = (CircleView)itemView.findViewById((R.id.circle));
+            notes = (TextView)itemView.findViewById((R.id.notes));
         }
     }
 }

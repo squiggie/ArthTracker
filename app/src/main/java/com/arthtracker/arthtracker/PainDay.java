@@ -4,7 +4,7 @@ import java.util.Date;
 
 class PainDay {
     private int mID;
-    private Date mDate;
+    private long mDate;
     private int mFingers;
     private int mThumbs;
     private int mWrists;
@@ -25,7 +25,7 @@ class PainDay {
 
     }
 
-    public void setmDate(Date mDate) {
+    public void setmDate(long mDate) {
         this.mDate = mDate;
     }
 
@@ -73,7 +73,7 @@ class PainDay {
         this.mNotes = mNotes;
     }
 
-    public Date getmDate() {
+    public long getmDate() {
 
         return mDate;
     }
