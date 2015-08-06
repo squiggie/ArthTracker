@@ -46,31 +46,30 @@ public class SQLiteHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        // drop books table if already exists
+        // drop table if already exists
         db.execSQL("DROP TABLE IF EXISTS painday");
         this.onCreate(db);
     }
 
     public void createPainday(PainDay painday) {
-        // get reference of the PaindayDB database
         SQLiteDatabase db = this.getWritableDatabase();
 
         // make values to be inserted
         ContentValues values = new ContentValues();
-        values.put(painday_DATE,painday.getmDate());
-        values.put(painday_FINGERS, painday.getmFingers());
-        values.put(painday_THUMBS,painday.getmThumbs());
-        values.put(painday_WRISTS,painday.getmWrists());
-        values.put(painday_ELBOWS,painday.getmElbows());
-        values.put(painday_SHOULDERS,painday.getmShoulders());
-        values.put(painday_KNEES,painday.getmKnees());
-        values.put(painday_ANKLES,painday.getmAnkles());
-        values.put(painday_FATIGUE,painday.getmFatigue());
-        values.put(painday_STIFFNESS,painday.getmStiffness());
-        values.put(painday_OVERALL,painday.getmOverall());
+        values.put(painday_ID,String.valueOf(painday.getmID()));
+        values.put(painday_DATE,String.valueOf(painday.getmDate()));
+        values.put(painday_FINGERS,String.valueOf(painday.getmFingers()));
+        values.put(painday_THUMBS,String.valueOf(painday.getmThumbs()));
+        values.put(painday_WRISTS,String.valueOf(painday.getmWrists()));
+        values.put(painday_ELBOWS,String.valueOf(painday.getmElbows()));
+        values.put(painday_SHOULDERS,String.valueOf(painday.getmShoulders()));
+        values.put(painday_KNEES,String.valueOf(painday.getmKnees()));
+        values.put(painday_ANKLES,String.valueOf(painday.getmAnkles()));
+        values.put(painday_FATIGUE,String.valueOf(painday.getmFatigue()));
+        values.put(painday_STIFFNESS,String.valueOf(painday.getmStiffness()));
+        values.put(painday_OVERALL,String.valueOf(painday.getmOverall()));
         values.put(painday_NOTES,painday.getmNotes());
 
-        // insert book
         db.insert(table_PAINDAY, null, values);
 
         // close database transaction
@@ -78,10 +77,8 @@ public class SQLiteHelper extends SQLiteOpenHelper {
     }
 
     public PainDay readPainDay(int id) {
-        // get reference of the PaindayDB database
         SQLiteDatabase db = this.getReadableDatabase();
 
-        // get book query
         Cursor cursor = db.query(table_PAINDAY, // a. table
                 COLUMNS, " id = ?", new String[] { String.valueOf(id) }, null, null, null, null);
 
@@ -91,7 +88,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
 
         PainDay painday = new PainDay();
         painday.setmID(cursor.getInt(0));
-        painday.setmDate(Date.parse(cursor.getInt(1)));
+        painday.setmDate((cursor.getInt(1)));
         painday.setmFingers(cursor.getInt(2));
         painday.setmThumbs(cursor.getInt(3));
         painday.setmWrists(cursor.getInt(4));
@@ -107,13 +104,11 @@ public class SQLiteHelper extends SQLiteOpenHelper {
         return painday;
     }
 
-    public List getAllBooks() {
+    public List getAllPainDays() {
         List painDays = new LinkedList();
 
-        // select book query
         String query = "SELECT  * FROM " + table_PAINDAY;
 
-        // get reference of the BookDB database
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(query, null);
 
@@ -123,7 +118,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
             do {
                 PainDay painday = new PainDay();
                 painday.setmID(cursor.getInt(0));
-                painday.setmDate(Date.parse(cursor.getInt(1)));
+                painday.setmDate(cursor.getInt(1));
                 painday.setmFingers(cursor.getInt(2));
                 painday.setmThumbs(cursor.getInt(3));
                 painday.setmWrists(cursor.getInt(4));
@@ -142,13 +137,13 @@ public class SQLiteHelper extends SQLiteOpenHelper {
         return painDays;
     }
 
-    public int updateBook(PainDay painDay) {
+    public int updatePainDay(PainDay painDay) {
 
-        // get reference of the BookDB database
         SQLiteDatabase db = this.getWritableDatabase();
 
         // make values to be inserted
         ContentValues values = new ContentValues();
+        values.put("id", painDay.getmID());
         values.put("date", painDay.getmDate());
         values.put("fingers", painDay.getmFingers());
         values.put("thumbs", painDay.getmThumbs());
@@ -169,13 +164,11 @@ public class SQLiteHelper extends SQLiteOpenHelper {
         return i;
     }
 
-    // Deleting single book
+    // Deleting single painday
     public void deleteBook(PainDay painday) {
-
-        // get reference of the BookDB database
         SQLiteDatabase db = this.getWritableDatabase();
 
-        // delete book
+        // delete painday
         db.delete(table_PAINDAY, painday_ID + " = ?", new String[] { String.valueOf(painday.getmID()) });
         db.close();
     }
