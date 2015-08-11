@@ -39,7 +39,7 @@ public class DayActivity extends ActionBarActivity implements fragment_pain_item
     private PainDay mPainDay = new PainDay();
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_day);
 

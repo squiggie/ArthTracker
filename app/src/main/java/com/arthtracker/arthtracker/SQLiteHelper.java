@@ -205,7 +205,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
         return i;
     }
 
-    public void deleteBook(PainDay painday) {
+    public void deletePainDay(PainDay painday) {
         SQLiteDatabase db = this.getWritableDatabase();
 
         // delete painday

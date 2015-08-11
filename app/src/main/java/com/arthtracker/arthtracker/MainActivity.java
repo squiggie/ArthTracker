@@ -1,5 +1,6 @@
 package com.arthtracker.arthtracker;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -18,7 +19,7 @@ public class MainActivity extends ActionBarActivity{
     private List<PainDay> painDays;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -65,15 +66,17 @@ public class MainActivity extends ActionBarActivity{
     }
 
     public void startDay(View view){
-        startActivity(new Intent (this, DayActivity.class));
+        startActivity(new Intent(this, DayActivity.class));
     }
 
     private void initializeData(){
         SQLiteHelper sqlHelper = new SQLiteHelper(this);
-        //sqlHelper.onUpgrade(sqlHelper.getWritableDatabase(),1,1);
         painDays = new ArrayList<>();
         painDays = sqlHelper.getAllPainDays();
     }
-
+    @Override
+    protected void onResume() {
+        super.onResume();
+    }
 }
 
