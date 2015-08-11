@@ -3,10 +3,12 @@ package com.arthtracker.arthtracker;
 import android.content.Context;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
 import com.github.pavlospt.CircleView;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -40,6 +42,26 @@ public class SummaryRVAdapter extends RecyclerView.Adapter<SummaryRVAdapter.Pers
         personViewHolder.notes.setText(painDays.get(i).getmNotes());
         personViewHolder.date.setText(sdf.format(new Date(painDays.get(i).getmDate() * 1000)));
         personViewHolder.circle.setTitleText(String.valueOf((painDays.get(i).getmOverall())));
+
+        //Long click to delete
+        personViewHolder.cv.setOnLongClickListener(new View.OnLongClickListener(){
+
+            @Override
+            public boolean onLongClick(View v) {
+                Log.d("Click", "Long Click");
+                return true;
+            }
+        });
+
+        //click to open day
+        personViewHolder.cv.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v) {
+                Log.d("Click", "Short Click");
+            }
+        });
+
         if (painDays.get(i).getmOverall() <= 1){
             personViewHolder.circle.setStrokeColor(context.getResources().getColor(R.color.green));
         }

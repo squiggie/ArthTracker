@@ -7,13 +7,13 @@
     android:id="@+id/cv"
     card_view:cardUseCompatPadding="true"
     card_view:cardCornerRadius="2dp"
-    card_view:cardElevation="4dp">
+    card_view:cardElevation="4dp"
+    android:clickable="true">
     <RelativeLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:padding="6dp"
-        android:clickable="true"
         android:background="?android:selectableItemBackground">
         <com.github.pavlospt.CircleView
             android:id="@+id/circle"

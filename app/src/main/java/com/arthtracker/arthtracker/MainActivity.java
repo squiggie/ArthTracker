@@ -5,20 +5,17 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 public class MainActivity extends ActionBarActivity{
-    private Toolbar toolbar;
     private List<PainDay> painDays;
-    private RecyclerView rv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,12 +23,12 @@ public class MainActivity extends ActionBarActivity{
         setContentView(R.layout.activity_main);
 
         //replace actionBar with customer toolbar
-        toolbar = (Toolbar) findViewById(R.id.app_bar);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.app_bar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(false);
 
         //set recyclerview for painday display
-        rv=(RecyclerView)findViewById(R.id.rv);
+        RecyclerView rv = (RecyclerView) findViewById(R.id.rv);
         LinearLayoutManager llm = new LinearLayoutManager(this);
         rv.setLayoutManager(llm);
 
