@@ -3,8 +3,6 @@ package com.arthtracker.arthtracker;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
-import android.support.v4.app.NavUtils;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -18,7 +16,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
-public class SummaryRVAdapter extends RecyclerView.Adapter<SummaryRVAdapter.PersonViewHolder> {
+public class SummaryRVAdapter extends RecyclerView.Adapter<SummaryRVAdapter.PainDayHolder> {
     List<PainDay> painDays;
     Context context;
 
@@ -33,23 +31,23 @@ public class SummaryRVAdapter extends RecyclerView.Adapter<SummaryRVAdapter.Pers
     }
 
     @Override
-    public PersonViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
+    public PainDayHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
         View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.summary_item, viewGroup, false);
-        PersonViewHolder pvh = new PersonViewHolder(v);
+        PainDayHolder pvh = new PainDayHolder(v);
         return pvh;
     }
 
     @Override
-    public void onBindViewHolder(final PersonViewHolder personViewHolder, final int i) {
+    public void onBindViewHolder(final PainDayHolder painDayHolder, final int i) {
         SimpleDateFormat sdf = new SimpleDateFormat("MMMM dd, yyyy");
         double total = painDays.get(i).getmTotal();
 
-        personViewHolder.notes.setText(painDays.get(i).getmNotes());
-        personViewHolder.date.setText(sdf.format(new Date(painDays.get(i).getmDate() * 1000)));
-        personViewHolder.circle.setTitleText(String.format("%.0f",total));
+        painDayHolder.notes.setText(painDays.get(i).getmNotes());
+        painDayHolder.date.setText(sdf.format(new Date(painDays.get(i).getmDate() * 1000)));
+        painDayHolder.circle.setTitleText(String.format("%.0f",total));
 
         //Long click to delete
-        personViewHolder.cv.setOnLongClickListener(new View.OnLongClickListener(){
+        painDayHolder.cv.setOnLongClickListener(new View.OnLongClickListener(){
 
             @Override
             public boolean onLongClick(final View v) {
@@ -60,8 +58,8 @@ public class SummaryRVAdapter extends RecyclerView.Adapter<SummaryRVAdapter.Pers
                             case DialogInterface.BUTTON_POSITIVE:
                                 //delete day
                                 SQLiteHelper sqlHelper = new SQLiteHelper(context);
-                                sqlHelper.deletePainDay(painDays.get(i));
-                                remove(personViewHolder);
+                                sqlHelper.deletePainDay(painDays.get(painDayHolder.getPosition()));
+                                remove(painDayHolder.getPosition());
                                 break;
 
                             case DialogInterface.BUTTON_NEGATIVE:
@@ -78,7 +76,7 @@ public class SummaryRVAdapter extends RecyclerView.Adapter<SummaryRVAdapter.Pers
         });
 
         //click to open day
-        personViewHolder.cv.setOnClickListener(new View.OnClickListener(){
+        painDayHolder.cv.setOnClickListener(new View.OnClickListener(){
 
             @Override
             public void onClick(View v) {
@@ -87,13 +85,13 @@ public class SummaryRVAdapter extends RecyclerView.Adapter<SummaryRVAdapter.Pers
         });
 
         if ( total <= 33){
-            personViewHolder.circle.setStrokeColor(context.getResources().getColor(R.color.green));
+            painDayHolder.circle.setStrokeColor(context.getResources().getColor(R.color.green));
         }
         else if ((total > 33) && (total <= 66)){
-            personViewHolder.circle.setStrokeColor(context.getResources().getColor(R.color.yellow));
+            painDayHolder.circle.setStrokeColor(context.getResources().getColor(R.color.yellow));
         }
         else{
-            personViewHolder.circle.setStrokeColor(context.getResources().getColor(R.color.red));
+            painDayHolder.circle.setStrokeColor(context.getResources().getColor(R.color.red));
         }
 
     }
@@ -103,18 +101,18 @@ public class SummaryRVAdapter extends RecyclerView.Adapter<SummaryRVAdapter.Pers
         return painDays.size();
     }
 
-    public void remove(PersonViewHolder item) {
-        painDays.remove(item.getPosition());
-        notifyItemRemoved(item.getPosition());
+    public void remove(int position) {
+        painDays.remove(position);
+        notifyItemRemoved(position);
     }
 
-    public class PersonViewHolder extends RecyclerView.ViewHolder {
+    public class PainDayHolder extends RecyclerView.ViewHolder {
         CardView cv;
         TextView date;
         TextView notes;
         CircleView circle;
 
-        PersonViewHolder(View itemView) {
+        PainDayHolder(View itemView) {
             super(itemView);
             cv = (CardView)itemView.findViewById(R.id.cv);
             date = (TextView)itemView.findViewById(R.id.date);
