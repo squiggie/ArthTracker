@@ -1,6 +1,13 @@
 package com.arthtracker.arthtracker;
 
+import android.support.annotation.NonNull;
+
+import java.util.Collection;
 import java.util.Date;
+import java.util.Iterator;
+import java.util.List;
+import java.util.ListIterator;
+import java.util.Properties;
 
 class PainDay {
     private int mID;
@@ -146,6 +153,7 @@ class PainDay {
     }
 
     public boolean validate(){
+        //property validation if needed
         return true;
     }
 

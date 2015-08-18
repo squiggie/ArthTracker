@@ -159,18 +159,25 @@ public class DayActivity extends ActionBarActivity implements fragment_pain_item
         mPainDay.setmDate(d.getTime() / 1000);
         //Validate Data
         if (mPainDay.validate()){
-            //Save to DB
             SQLiteHelper sqlHelper = new SQLiteHelper(this);
-            if (sqlHelper.createPainday(mPainDay)) {
-                Toast.makeText(this, "New Day Saved", Toast.LENGTH_LONG).show();
-                //navigate back up
-                NavUtils.navigateUpFromSameTask(this);
+            //Validate date doesn't already exist
+            if (!sqlHelper.painDayExists(mPainDay.getmDate())) {
+                //Save to DB
+                if (sqlHelper.createPainday(mPainDay)) {
+                    Toast.makeText(this, "New Day Saved", Toast.LENGTH_LONG).show();
+                    //navigate back up
+                    NavUtils.navigateUpFromSameTask(this);
+                } else {
+                    Toast.makeText(this, "Oops something went wrong. Try Again!", Toast.LENGTH_LONG).show();
+                }
             }
             else{
-                Toast.makeText(this, "Oops something went wrong. Try Again!", Toast.LENGTH_LONG).show();
+                //Date already exists
+                Toast.makeText(this,"An entry exists for this date!",Toast.LENGTH_LONG).show();
             }
         }
         else{
+            //Data not valid
             Toast.makeText(this,"Oops something went wrong. Try again!",Toast.LENGTH_LONG).show();
         }
     }

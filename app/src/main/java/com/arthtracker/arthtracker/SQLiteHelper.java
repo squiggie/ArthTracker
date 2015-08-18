@@ -151,7 +151,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
 
         Cursor cursor = db.query(table_PAINDAY, // a. table
-                COLUMNS, " date > ? ORDER BY date DESC", new String[] { String.valueOf(c.getTimeInMillis()/1000) }, null, null, null, null);
+                COLUMNS, " date > ? ORDER BY date DESC", new String[]{String.valueOf(c.getTimeInMillis() / 1000)}, null, null, null, null);
 
         // parse all results
         PainDay painDay = null;
@@ -211,5 +211,18 @@ public class SQLiteHelper extends SQLiteOpenHelper {
         // delete painday
         db.delete(table_PAINDAY, painday_ID + " = ?", new String[] { String.valueOf(painday.getmID()) });
         db.close();
+    }
+
+    public boolean painDayExists (long date){
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor cursor = db.query(table_PAINDAY, COLUMNS, " date = ?", new String[] { String.valueOf(date) }, null, null, null, null);
+        if (cursor.moveToFirst()) {
+            // record exists
+            return true;
+        } else {
+            // record not found
+            return false;
+        }
     }
 }
