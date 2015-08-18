@@ -16,6 +16,7 @@ class PainDay {
     private int mStiffness;
     private int mOverall;
     private String mNotes;
+    private double mTotal = -1;
 
     public PainDay(){
         //Constructor
@@ -73,6 +74,16 @@ class PainDay {
         this.mNotes = mNotes;
     }
 
+    public void computeTotal() {
+        //higher score is worse
+        //overall has 1.5 weight
+        //5*9 + 5*1.5 = 52.5 total points
+        mTotal = mFingers + mThumbs + mWrists + mElbows + mShoulders + mKnees + mAnkles + mFatigue + mStiffness;
+        mTotal = mTotal + (mOverall * 1.5);
+        mTotal = mTotal / 52.5;
+        mTotal = mTotal * 100; //percentage
+        mTotal = (double) Math.round(mTotal);
+    }
     public long getmDate() {
 
         return mDate;
@@ -116,6 +127,14 @@ class PainDay {
 
     public int getmOverall() {
         return mOverall;
+    }
+
+    public double getmTotal() {
+
+        if (mTotal < 0){
+            computeTotal();
+        }
+        return mTotal;
     }
 
     public String getmNotes() {

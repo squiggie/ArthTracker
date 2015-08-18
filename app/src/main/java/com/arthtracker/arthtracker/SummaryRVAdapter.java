@@ -42,10 +42,11 @@ public class SummaryRVAdapter extends RecyclerView.Adapter<SummaryRVAdapter.Pers
     @Override
     public void onBindViewHolder(final PersonViewHolder personViewHolder, final int i) {
         SimpleDateFormat sdf = new SimpleDateFormat("MMMM dd, yyyy");
+        double total = painDays.get(i).getmTotal();
 
         personViewHolder.notes.setText(painDays.get(i).getmNotes());
         personViewHolder.date.setText(sdf.format(new Date(painDays.get(i).getmDate() * 1000)));
-        personViewHolder.circle.setTitleText(String.valueOf((painDays.get(i).getmOverall())));
+        personViewHolder.circle.setTitleText(String.format("%.0f",total));
 
         //Long click to delete
         personViewHolder.cv.setOnLongClickListener(new View.OnLongClickListener(){
@@ -85,10 +86,10 @@ public class SummaryRVAdapter extends RecyclerView.Adapter<SummaryRVAdapter.Pers
             }
         });
 
-        if (painDays.get(i).getmOverall() <= 1){
+        if ( total <= 33){
             personViewHolder.circle.setStrokeColor(context.getResources().getColor(R.color.green));
         }
-        else if ((painDays.get(i).getmOverall() >= 2) && (painDays.get(i).getmOverall() <= 3)){
+        else if ((total > 33) && (total <= 66)){
             personViewHolder.circle.setStrokeColor(context.getResources().getColor(R.color.yellow));
         }
         else{
