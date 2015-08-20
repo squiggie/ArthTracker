@@ -19,9 +19,8 @@
                 android:id="@+id/tvFingerPain"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
                 android:text="Finger Pain:"
-                android:padding="4dp" />
+                android:padding="8dp" />
 
             <TextView
                 android:id="@+id/tvFingerPainScore"
@@ -30,7 +29,7 @@
                 android:layout_alignTop="@+id/tvFingerPain"
                 android:text="3"
                 android:layout_toRightOf="@+id/tvFingerPain"
-                android:padding="4dp" />
+                android:padding="8dp" />
 
             <SeekBar
                 android:id="@+id/sbFingerPain"
@@ -52,9 +51,8 @@
                 android:id="@+id/tvThumbPain"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
                 android:text="Thumb Pain:"
-                android:padding="4dp"
+                android:padding="8dp"
                 android:layout_below="@+id/sbFingerPain"/>
 
             <TextView
@@ -64,7 +62,7 @@
                 android:layout_alignTop="@+id/tvThumbPain"
                 android:text="3"
                 android:layout_toRightOf="@+id/tvThumbPain"
-                android:padding="4dp" />
+                android:padding="8dp" />
 
             <SeekBar
                 android:id="@+id/sbThumbPain"
@@ -86,9 +84,8 @@
                 android:id="@+id/tvWristPain"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
                 android:text="Wrist Pain:"
-                android:padding="4dp"
+                android:padding="8dp"
                 android:layout_below="@+id/sbThumbPain"/>
 
             <TextView
@@ -98,7 +95,7 @@
                 android:layout_alignTop="@+id/tvWristPain"
                 android:text="3"
                 android:layout_toRightOf="@+id/tvWristPain"
-                android:padding="4dp" />
+                android:padding="8dp" />
 
             <SeekBar
                 android:id="@+id/sbWristPain"
@@ -120,9 +117,8 @@
                 android:id="@+id/tvElbowPain"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
                 android:text="Elbow Pain:"
-                android:padding="4dp"
+                android:padding="8dp"
                 android:layout_below="@+id/sbWristPain"/>
 
             <TextView
@@ -132,7 +128,7 @@
                 android:layout_alignTop="@+id/tvElbowPain"
                 android:text="3"
                 android:layout_toRightOf="@+id/tvElbowPain"
-                android:padding="4dp" />
+                android:padding="8dp" />
 
             <SeekBar
                 android:id="@+id/sbElbowPain"
@@ -154,9 +150,8 @@
                 android:id="@+id/tvShoulderPain"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
                 android:text="Shoulder Pain:"
-                android:padding="4dp"
+                android:padding="8dp"
                 android:layout_below="@+id/sbElbowPain"/>
 
             <TextView
@@ -166,7 +161,7 @@
                 android:layout_alignTop="@+id/tvShoulderPain"
                 android:text="3"
                 android:layout_toRightOf="@+id/tvShoulderPain"
-                android:padding="4dp" />
+                android:padding="8dp" />
 
             <SeekBar
                 android:id="@+id/sbShoulderPain"
@@ -188,9 +183,8 @@
                 android:id="@+id/tvKneePain"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
                 android:text="Knee Pain:"
-                android:padding="4dp"
+                android:padding="8dp"
                 android:layout_below="@+id/sbShoulderPain"/>
 
             <TextView
@@ -200,7 +194,7 @@
                 android:layout_alignTop="@+id/tvKneePain"
                 android:text="3"
                 android:layout_toRightOf="@+id/tvKneePain"
-                android:padding="4dp" />
+                android:padding="8dp" />
 
             <SeekBar
                 android:id="@+id/sbKneePain"
@@ -222,9 +216,8 @@
                 android:id="@+id/tvAnklePain"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
                 android:text="Ankle Pain:"
-                android:padding="4dp"
+                android:padding="8dp"
                 android:layout_below="@+id/sbKneePain"/>
 
             <TextView
@@ -234,7 +227,7 @@
                 android:layout_alignTop="@+id/tvAnklePain"
                 android:text="3"
                 android:layout_toRightOf="@+id/tvAnklePain"
-                android:padding="4dp" />
+                android:padding="8dp" />
 
             <SeekBar
                 android:id="@+id/sbAnklePain"
@@ -256,9 +249,8 @@
                 android:id="@+id/tvFatigue"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
                 android:text="Fatigue:"
-                android:padding="4dp"
+                android:padding="8dp"
                 android:layout_below="@+id/sbAnklePain"/>
 
             <TextView
@@ -268,7 +260,7 @@
                 android:layout_alignTop="@+id/tvFatigue"
                 android:text="3"
                 android:layout_toRightOf="@+id/tvFatigue"
-                android:padding="4dp" />
+                android:padding="8dp" />
 
             <SeekBar
                 android:id="@+id/sbFatigue"
@@ -290,10 +282,10 @@
                 android:id="@+id/tvStiffness"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
                 android:text="Stiffness:"
-                android:padding="4dp"
-                android:layout_below="@+id/sbFatigue"/>
+                android:padding="8dp"
+                android:layout_below="@+id/sbFatigue"
+                android:password="false" />
 
             <TextView
                 android:id="@+id/tvStiffnessScore"
@@ -302,7 +294,8 @@
                 android:layout_alignTop="@+id/tvStiffness"
                 android:text="3"
                 android:layout_toRightOf="@+id/tvStiffness"
-                android:padding="4dp" />
+                android:padding="8dp"
+                android:password="false" />
 
             <SeekBar
                 android:id="@+id/sbStiffness"
@@ -324,10 +317,10 @@
                 android:id="@+id/tvOverall"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
                 android:text="Overall Score:"
-                android:padding="4dp"
-                android:layout_below="@+id/sbStiffness"/>
+                android:padding="8dp"
+                android:layout_below="@+id/sbStiffness"
+                android:password="false" />
 
             <TextView
                 android:id="@+id/tvOverallScore"
@@ -336,7 +329,8 @@
                 android:layout_alignTop="@+id/tvOverall"
                 android:text="3"
                 android:layout_toRightOf="@+id/tvOverall"
-                android:padding="4dp" />
+                android:padding="8dp"
+                android:password="false" />
 
             <SeekBar
                 android:id="@+id/sbOverall"
