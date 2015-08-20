@@ -3,6 +3,7 @@ package com.arthtracker.arthtracker;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -15,6 +16,8 @@ import com.github.pavlospt.CircleView;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+
+import static android.support.v4.app.ActivityCompat.startActivity;
 
 public class SummaryRVAdapter extends RecyclerView.Adapter<SummaryRVAdapter.PainDayHolder> {
     List<PainDay> painDays;
@@ -80,7 +83,10 @@ public class SummaryRVAdapter extends RecyclerView.Adapter<SummaryRVAdapter.Pain
 
             @Override
             public void onClick(View v) {
-                Log.d("Click", "Short Click");
+                Intent i = new Intent(context, DayActivity.class);
+                i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                i.putExtra("PainDay",painDays.get(painDayHolder.getPosition()));
+                context.startActivity(i);
             }
         });
 

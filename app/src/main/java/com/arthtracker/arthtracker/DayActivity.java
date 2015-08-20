@@ -1,6 +1,8 @@
 package com.arthtracker.arthtracker;
 
+import android.content.Intent;
 import android.net.Uri;
+import android.provider.SyncStateContract;
 import android.support.v4.app.NavUtils;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
@@ -14,6 +16,7 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.Serializable;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -27,16 +30,26 @@ public class DayActivity extends ActionBarActivity implements fragment_pain_item
     private TextView mtvFingers;
     private TextView mtvThumbs;
     private TextView mtvWrists;
-    private TextView mtvElbows;
     private TextView mtvShoulders;
     private TextView mtvKnees;
-    private TextView mtvAnkles;
-    private TextView mtvFatigue;
-    private TextView mtvStiffness;
-    private TextView mtvOverall;
-    private DatePicker mDatePicker;
-    private EditText mNotes;
-    private PainDay mPainDay = new PainDay();
+    private TextView mtvElbows;
+    private TextView  mtvAnkles;
+    private TextView  mtvFatigue;
+    private TextView  mtvStiffness;
+    private TextView  mtvOverall;
+    private DatePicker  mDatePicker;
+    private TextView  mNotes;
+    private PainDay mPainDay;
+    private SeekBar msbFingerPain;
+    private SeekBar msbThumbPain;
+    private SeekBar msbWristPain;
+    private SeekBar msbElbowPain;
+    private SeekBar msbShoulderPain;
+    private SeekBar msbKneePain;
+    private SeekBar msbAnklePain;
+    private SeekBar msbFatigue;
+    private SeekBar msbStiffness;
+    private SeekBar msbOverall;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -49,7 +62,7 @@ public class DayActivity extends ActionBarActivity implements fragment_pain_item
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        //set text views
+        //create objects
         mtvFingers = (TextView)findViewById(R.id.tvFingerPainScore);
         mtvThumbs = (TextView)findViewById(R.id.tvThumbPainScore);
         mtvWrists = (TextView)findViewById(R.id.tvWristPainScore);
@@ -62,55 +75,87 @@ public class DayActivity extends ActionBarActivity implements fragment_pain_item
         mtvOverall = (TextView)findViewById(R.id.tvOverallScore);
         mDatePicker = (DatePicker)findViewById(R.id.datePicker);
         mNotes = (EditText)findViewById(R.id.notes);
+        msbFingerPain = (SeekBar)findViewById(R.id.sbFingerPain);
+        msbThumbPain = (SeekBar)findViewById(R.id.sbThumbPain);
+        msbWristPain = (SeekBar)findViewById(R.id.sbWristPain);
+        msbElbowPain = (SeekBar)findViewById(R.id.sbElbowPain);
+        msbShoulderPain = (SeekBar)findViewById(R.id.sbShoulderPain);
+        msbKneePain = (SeekBar)findViewById(R.id.sbKneePain);
+        msbAnklePain = (SeekBar)findViewById(R.id.sbAnklePain);
+        msbFatigue = (SeekBar)findViewById(R.id.sbFatigue);
+        msbStiffness = (SeekBar)findViewById(R.id.sbStiffness);
+        msbOverall = (SeekBar)findViewById(R.id.sbOverall);
 
-        //set default values
-
-        mPainDay.setmFingers(3);
-        mPainDay.setmThumbs(3);
-        mPainDay.setmWrists(3);
-        mPainDay.setmElbows(3);
-        mPainDay.setmShoulders(3);
-        mPainDay.setmKnees(3);
-        mPainDay.setmAnkles(3);
-        mPainDay.setmFatigue(3);
-        mPainDay.setmStiffness(3);
-        mPainDay.setmOverall(3);
-        mPainDay.setmNotes("");
-        mPainDay.setmDate(System.currentTimeMillis() / 1000);
+        PainDay p = (PainDay)this.getIntent().getSerializableExtra("PainDay");
+        if(p!=null){
+            //Edit PainDay - Set current values
+            mPainDay = p;
+            mtvFingers.setText(String.valueOf(mPainDay.getmFingers()));
+            mtvThumbs.setText(String.valueOf(mPainDay.getmThumbs()));
+            mtvWrists.setText(String.valueOf(mPainDay.getmWrists()));
+            mtvShoulders.setText(String.valueOf(mPainDay.getmShoulders()));
+            mtvKnees.setText(String.valueOf(mPainDay.getmKnees()));
+            mtvElbows.setText(String.valueOf(mPainDay.getmElbows()));
+            mtvAnkles.setText(String.valueOf(mPainDay.getmAnkles()));
+            mtvFatigue.setText(String.valueOf(mPainDay.getmFatigue()));
+            mtvStiffness.setText(String.valueOf(mPainDay.getmStiffness()));
+            mtvOverall.setText(String.valueOf(mPainDay.getmOverall()));
+            mNotes.setText(String.valueOf(mPainDay.getmNotes()));
+            msbFingerPain.setProgress(mPainDay.getmFingers());
+            msbFingerPain.setProgress(mPainDay.getmFingers());
+            msbThumbPain.setProgress(mPainDay.getmThumbs());
+            msbWristPain.setProgress(mPainDay.getmWrists());
+            msbShoulderPain.setProgress(mPainDay.getmShoulders());
+            msbKneePain.setProgress(mPainDay.getmKnees());
+            msbElbowPain.setProgress(mPainDay.getmElbows());
+            msbAnklePain.setProgress(mPainDay.getmAnkles());
+            msbFatigue.setProgress(mPainDay.getmFatigue());
+            msbStiffness.setProgress(mPainDay.getmStiffness());
+            msbOverall.setProgress(mPainDay.getmOverall());
+            Calendar c = Calendar.getInstance();
+            c.setTimeInMillis(mPainDay.getmDate() * 1000);
+            mDatePicker.init(c.get(Calendar.YEAR),c.get(Calendar.MONTH),c.get(Calendar.DAY_OF_MONTH),this);
+        }
+        else{
+            //New PainDay - Set Default Values
+            mPainDay = new PainDay();
+            mPainDay.setmFingers(3);
+            mPainDay.setmThumbs(3);
+            mPainDay.setmWrists(3);
+            mPainDay.setmElbows(3);
+            mPainDay.setmShoulders(3);
+            mPainDay.setmKnees(3);
+            mPainDay.setmAnkles(3);
+            mPainDay.setmFatigue(3);
+            mPainDay.setmStiffness(3);
+            mPainDay.setmOverall(3);
+            mPainDay.setmNotes("");
+            mPainDay.setmDate(System.currentTimeMillis() / 1000);
+            //DatePicker Listener
+            Calendar c = Calendar.getInstance();
+            int year = c.get(Calendar.YEAR);
+            int month = c.get(Calendar.MONTH);
+            int day = c.get(Calendar.DAY_OF_MONTH);
+            mDatePicker.init(year, month, day, this);
+            mDatePicker.setMaxDate(new Date().getTime());
+        }
 
         setListeners();
     }
 
     private void setListeners(){
         //SeekBar Listeners
-        SeekBar sbFingerPain = (SeekBar)findViewById(R.id.sbFingerPain);
-        sbFingerPain.setOnSeekBarChangeListener(this);
-        SeekBar sbThumbPain = (SeekBar)findViewById(R.id.sbThumbPain);
-        sbThumbPain.setOnSeekBarChangeListener(this);
-        SeekBar sbWristPain = (SeekBar)findViewById(R.id.sbWristPain);
-        sbWristPain.setOnSeekBarChangeListener(this);
-        SeekBar sbElbowPain = (SeekBar)findViewById(R.id.sbElbowPain);
-        sbElbowPain.setOnSeekBarChangeListener(this);
-        SeekBar sbShoulderPain = (SeekBar)findViewById(R.id.sbShoulderPain);
-        sbShoulderPain.setOnSeekBarChangeListener(this);
-        SeekBar sbKneePain = (SeekBar)findViewById(R.id.sbKneePain);
-        sbKneePain.setOnSeekBarChangeListener(this);
-        SeekBar sbAnklePain = (SeekBar)findViewById(R.id.sbAnklePain);
-        sbAnklePain.setOnSeekBarChangeListener(this);
-        SeekBar sbFatigue = (SeekBar)findViewById(R.id.sbFatigue);
-        sbFatigue.setOnSeekBarChangeListener(this);
-        SeekBar sbStiffness = (SeekBar)findViewById(R.id.sbStiffness);
-        sbStiffness.setOnSeekBarChangeListener(this);
-        SeekBar sbOverall = (SeekBar)findViewById(R.id.sbOverall);
-        sbOverall.setOnSeekBarChangeListener(this);
+        msbFingerPain.setOnSeekBarChangeListener(this);
+        msbThumbPain.setOnSeekBarChangeListener(this);
+        msbWristPain.setOnSeekBarChangeListener(this);
+        msbElbowPain.setOnSeekBarChangeListener(this);
+        msbShoulderPain.setOnSeekBarChangeListener(this);
+        msbKneePain.setOnSeekBarChangeListener(this);
+        msbAnklePain.setOnSeekBarChangeListener(this);
+        msbFatigue.setOnSeekBarChangeListener(this);
+        msbStiffness.setOnSeekBarChangeListener(this);
+        msbOverall.setOnSeekBarChangeListener(this);
 
-        //DatePicker Listener
-        Calendar c = Calendar.getInstance();
-        int year = c.get(Calendar.YEAR);
-        int month = c.get(Calendar.MONTH);
-        int day = c.get(Calendar.DAY_OF_MONTH);
-        mDatePicker.init(year,month,day,this);
-        mDatePicker.setMaxDate(new Date().getTime());
     }
 
     @Override

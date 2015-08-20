@@ -1,15 +1,9 @@
 package com.arthtracker.arthtracker;
 
-import android.support.annotation.NonNull;
-
-import java.util.Collection;
+import java.io.Serializable;
 import java.util.Date;
-import java.util.Iterator;
-import java.util.List;
-import java.util.ListIterator;
-import java.util.Properties;
 
-class PainDay {
+class PainDay implements Serializable {
     private int mID;
     private long mDate;
     private int mFingers;
