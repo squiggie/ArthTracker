@@ -12,12 +12,12 @@ import android.view.ViewGroup;
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link fragment_pain_items.OnFragmentInteractionListener} interface
+ * {@link PainItems.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link fragment_pain_items#newInstance} factory method to
+ * Use the {@link PainItems#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class fragment_pain_items extends Fragment {
+public class PainItems extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -38,8 +38,8 @@ public class fragment_pain_items extends Fragment {
      * @return A new instance of fragment fragment_pain_items.
      */
     // TODO: Rename and change types and number of parameters
-    public static fragment_pain_items newInstance(String param1, String param2) {
-        fragment_pain_items fragment = new fragment_pain_items();
+    public static PainItems newInstance(String param1, String param2) {
+        PainItems fragment = new PainItems();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -47,7 +47,7 @@ public class fragment_pain_items extends Fragment {
         return fragment;
     }
 
-    public fragment_pain_items() {
+    public PainItems() {
         // Required empty public constructor
     }
 
