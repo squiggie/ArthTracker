@@ -1,8 +1,6 @@
 package com.arthtracker.arthtracker;
 
-import android.content.Intent;
 import android.net.Uri;
-import android.provider.SyncStateContract;
 import android.support.v4.app.NavUtils;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
@@ -10,23 +8,21 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.io.Serializable;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
+import org.json.JSONObject;
+
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
-public class DayActivity extends ActionBarActivity implements fragment_pain_items.OnFragmentInteractionListener, SeekBar.OnSeekBarChangeListener, DatePicker.OnDateChangedListener{
+public class DayActivity extends ActionBarActivity implements PainItems.OnFragmentInteractionListener, SeekBar.OnSeekBarChangeListener, DatePicker.OnDateChangedListener{
     private Toolbar toolbar;
-    private String[] values;
     private TextView mtvFingers;
     private TextView mtvThumbs;
     private TextView mtvWrists;
@@ -50,6 +46,7 @@ public class DayActivity extends ActionBarActivity implements fragment_pain_item
     private SeekBar msbFatigue;
     private SeekBar msbStiffness;
     private SeekBar msbOverall;
+    private CheckBox mchkWeather;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -85,6 +82,7 @@ public class DayActivity extends ActionBarActivity implements fragment_pain_item
         msbFatigue = (SeekBar)findViewById(R.id.sbFatigue);
         msbStiffness = (SeekBar)findViewById(R.id.sbStiffness);
         msbOverall = (SeekBar)findViewById(R.id.sbOverall);
+        mchkWeather = (CheckBox)findViewById(R.id.chkWeather);
 
         PainDay p = (PainDay)this.getIntent().getSerializableExtra("PainDay");
         if(p!=null){
@@ -114,7 +112,9 @@ public class DayActivity extends ActionBarActivity implements fragment_pain_item
             msbOverall.setProgress(mPainDay.getmOverall());
             Calendar c = Calendar.getInstance();
             c.setTimeInMillis(mPainDay.getmDate() * 1000);
-            mDatePicker.init(c.get(Calendar.YEAR),c.get(Calendar.MONTH),c.get(Calendar.DAY_OF_MONTH),this);
+            mDatePicker.init(c.get(Calendar.YEAR), c.get(Calendar.MONTH), c.get(Calendar.DAY_OF_MONTH), this);
+            mchkWeather.setChecked(true);
+            mchkWeather.setClickable(false);
         }
         else{
             //New PainDay - Set Default Values
@@ -183,6 +183,24 @@ public class DayActivity extends ActionBarActivity implements fragment_pain_item
 
         return super.onOptionsItemSelected(item);
     }
+
+    public void checkWeather(View v){
+        if (mchkWeather.isChecked()){
+            if (mPainDay.getmWeather() == "" || mPainDay.getmWeather() == null){
+                JSONclient client = new JSONclient(this, l);
+                String url = "http://api.wunderground.com/api/13ff1e7f75830cc2/conditions/q/65619.json";
+                client.execute(url);
+            }
+        }
+    }
+
+    GetJSONListener l = new GetJSONListener(){
+
+        @Override
+        public void onRemoteCallComplete(JSONObject jsonFromNet) {
+            mPainDay.setmWeather(jsonFromNet.toString());
+         }
+    };
 
     public void saveDay(View v){
         //populate data

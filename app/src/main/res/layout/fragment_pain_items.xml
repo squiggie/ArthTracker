@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.arthtracker.arthtracker.fragment_pain_items">
+    tools:context="com.arthtracker.arthtracker.PainItems">
 
     <ScrollView
         android:id="@+id/scrollView"
@@ -348,6 +348,14 @@
                 android:paddingRight="16dp"
                 android:paddingBottom="4dp"
                 android:progress="3" />
+            <CheckBox
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/chkWeather"
+                android:layout_below="@+id/sbOverall"
+                android:layout_alignLeft="@+id/sbOverall"
+                android:text="Include Weather Data"
+                android:onClick="checkWeather"/>
             <EditText
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -355,7 +363,7 @@
                 android:ems="10"
                 android:id="@+id/notes"
                 android:layout_gravity="center_horizontal|bottom"
-                android:layout_below="@+id/sbOverall"
+                android:layout_below="@+id/chkWeather"
                 android:layout_alignLeft="@+id/sbOverall"
                 android:layout_alignRight="@+id/sbOverall"
                 android:contentDescription="Notes:"

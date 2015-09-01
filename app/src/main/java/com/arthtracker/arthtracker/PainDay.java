@@ -18,6 +18,7 @@ class PainDay implements Serializable {
     private int mOverall;
     private String mNotes;
     private double mTotal = -1;
+    private String mWeather;
 
     public PainDay(){
         //Constructor
@@ -162,4 +163,13 @@ class PainDay implements Serializable {
     public void setmID(int mID) {
         this.mID = mID;
     }
+
+    public String getmWeather() {
+        return mWeather;
+    }
+
+    public void setmWeather(String mWeather) {
+        this.mWeather = mWeather;
+    }
+
 }

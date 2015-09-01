@@ -14,7 +14,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 public class SQLiteHelper extends SQLiteOpenHelper {
 
     // database version
-    private static final int database_VERSION = 1;
+    private static final int database_VERSION = 2;
     // database name
     private static final String database_NAME = "ArthTracker";
     private static final String table_PAINDAY = "painday";
@@ -31,8 +31,9 @@ public class SQLiteHelper extends SQLiteOpenHelper {
     private static final String painday_STIFFNESS = "stiffness";
     private static final String painday_OVERALL = "overall";
     private static final String painday_NOTES = "notes";
+    private static final String painday_WEATHER = "weather";
 
-    private static final String[] COLUMNS = { painday_ID, painday_DATE, painday_FINGERS, painday_THUMBS, painday_WRISTS, painday_ELBOWS, painday_SHOULDERS, painday_KNEES, painday_ANKLES, painday_FATIGUE,painday_STIFFNESS, painday_OVERALL, painday_NOTES };
+    private static final String[] COLUMNS = { painday_ID, painday_DATE, painday_FINGERS, painday_THUMBS, painday_WRISTS, painday_ELBOWS, painday_SHOULDERS, painday_KNEES, painday_ANKLES, painday_FATIGUE,painday_STIFFNESS, painday_OVERALL, painday_NOTES,painday_WEATHER };
 
     public SQLiteHelper(Context context) {
         super(context, database_NAME, null, database_VERSION);
@@ -41,7 +42,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         // SQL statement to create painday table
-        String CREATE_PAINDAY_TABLE = "CREATE TABLE painday ( id INTEGER PRIMARY KEY AUTOINCREMENT, date LONG, fingers INTEGER, thumbs INTEGER, wrists INTEGER, elbows INTEGER, shoulders INTEGER, knees INTEGER, ankles INTEGER, fatigue INTEGER, stiffness INTEGER, overall INTEGER, notes TEXT)";
+        String CREATE_PAINDAY_TABLE = "CREATE TABLE painday ( id INTEGER PRIMARY KEY AUTOINCREMENT, date LONG, fingers INTEGER, thumbs INTEGER, wrists INTEGER, elbows INTEGER, shoulders INTEGER, knees INTEGER, ankles INTEGER, fatigue INTEGER, stiffness INTEGER, overall INTEGER, notes TEXT, weather TEXT)";
         db.execSQL(CREATE_PAINDAY_TABLE);
     }
 
@@ -69,6 +70,8 @@ public class SQLiteHelper extends SQLiteOpenHelper {
             values.put(painday_STIFFNESS, String.valueOf(painday.getmStiffness()));
             values.put(painday_OVERALL, String.valueOf(painday.getmOverall()));
             values.put(painday_NOTES, painday.getmNotes());
+            values.put(painday_WEATHER, painday.getmWeather());
+
 
             db.insert(table_PAINDAY, null, values);
 
@@ -105,7 +108,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
         painday.setmStiffness(cursor.getInt(10));
         painday.setmOverall(cursor.getInt(11));
         painday.setmNotes(cursor.getString(12));
-
+        painday.setmWeather(cursor.getString(13));
         return painday;
     }
 
@@ -135,7 +138,8 @@ public class SQLiteHelper extends SQLiteOpenHelper {
                 painday.setmFatigue(cursor.getInt(9));
                 painday.setmStiffness(cursor.getInt(10));
                 painday.setmOverall(cursor.getInt(11));
-                painday.setmNotes(cursor.getString(12));                // Add book to books
+                painday.setmNotes(cursor.getString(12));
+                painday.setmWeather(cursor.getString(13));
 
                 painDays.add(painday);
             } while (cursor.moveToNext());
@@ -170,7 +174,8 @@ public class SQLiteHelper extends SQLiteOpenHelper {
                 painday.setmFatigue(cursor.getInt(9));
                 painday.setmStiffness(cursor.getInt(10));
                 painday.setmOverall(cursor.getInt(11));
-                painday.setmNotes(cursor.getString(12));                // Add book to books
+                painday.setmNotes(cursor.getString(12));
+                painday.setmWeather(cursor.getString(13));
 
                 painDays.add(painday);
             } while (cursor.moveToNext());
@@ -197,6 +202,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
         values.put("stiffness", painDay.getmStiffness());
         values.put("overall", painDay.getmOverall());
         values.put("notes", painDay.getmNotes());
+        values.put("weather", painDay.getmWeather());
 
         // update
         int i = db.update(table_PAINDAY, values, painday_ID + " = ?", new String[] { String.valueOf(painDay.getmID()) });
