@@ -49,5 +49,198 @@
             android:layout_alignLeft="@+id/date"
             android:textStyle="italic"
             android:textSize="12sp" />
+        <View
+            android:layout_width="fill_parent"
+            android:id="@+id/horizontalLine"
+            android:layout_height="1dp"
+            android:background="@android:color/darker_gray"
+            android:layout_below="@+id/circle"
+            android:layout_marginTop="6dp"
+            android:layout_marginBottom="6dp" />
+        <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+        android:text="Fingers"
+        android:id="@+id/finger"
+        android:layout_below="@+id/horizontalLine"
+        android:textStyle="italic"
+        android:textSize="10sp"
+        android:layout_alignLeft="@+id/circle"
+            android:layout_margin="4dp" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/fingerCircle"
+            android:layout_below="@+id/horizontalLine"
+            android:layout_toRightOf="@+id/finger"
+            android:background="@drawable/circle_small"
+            android:layout_marginLeft="4dp"
+            android:layout_marginTop="2dp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            android:text="Thumbs"
+            android:id="@+id/thumb"
+            android:layout_below="@+id/horizontalLine"
+            android:textStyle="italic"
+            android:textSize="10sp"
+            android:layout_toRightOf="@+id/fingerCircle"
+            android:layout_margin="4dp" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/thumbCircle"
+            android:layout_below="@+id/horizontalLine"
+            android:layout_toRightOf="@+id/thumb"
+            android:background="@drawable/circle_small"
+            android:layout_marginTop="2dp"
+            android:layout_marginLeft="4dp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            android:text="Wrists"
+            android:id="@+id/wrist"
+            android:layout_below="@+id/horizontalLine"
+            android:textStyle="italic"
+            android:textSize="10sp"
+            android:layout_toRightOf="@+id/thumbCircle"
+            android:layout_margin="4dp" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/wristCircle"
+            android:layout_below="@+id/horizontalLine"
+            android:layout_toRightOf="@+id/wrist"
+            android:background="@drawable/circle_small"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="2dp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            android:text="Elbows"
+            android:id="@+id/elbow"
+            android:layout_below="@+id/horizontalLine"
+            android:textStyle="italic"
+            android:textSize="10sp"
+            android:layout_toRightOf="@+id/wristCircle"
+            android:layout_margin="4dp" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/elbowCircle"
+            android:layout_below="@+id/horizontalLine"
+            android:layout_toRightOf="@+id/elbow"
+            android:background="@drawable/circle_small"
+            android:layout_marginLeft="4dp"
+            android:layout_marginTop="2dp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            android:text="Knees"
+            android:id="@+id/knee"
+            android:layout_below="@+id/horizontalLine"
+            android:textStyle="italic"
+            android:textSize="10sp"
+            android:layout_toRightOf="@+id/elbowCircle"
+            android:layout_margin="4dp" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/kneeCircle"
+            android:layout_below="@+id/horizontalLine"
+            android:layout_toRightOf="@+id/knee"
+            android:background="@drawable/circle_small"
+            android:layout_marginLeft="4dp"
+            android:layout_marginTop="2dp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            android:text="Ankles"
+            android:id="@+id/ankles"
+            android:layout_below="@+id/fingerCircle"
+            android:textStyle="italic"
+            android:textSize="10sp"
+            android:layout_alignLeft="@+id/finger"
+            android:layout_marginTop="4dp" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/ankleCircle"
+            android:layout_below="@+id/fingerCircle"
+            android:layout_alignLeft="@+id/fingerCircle"
+            android:background="@drawable/circle_small"
+            android:layout_marginTop="2dp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            android:text="Fatigue"
+            android:id="@+id/fatigue"
+            android:layout_below="@+id/thumbCircle"
+            android:textStyle="italic"
+            android:textSize="10sp"
+            android:layout_alignLeft="@+id/thumb"
+            android:layout_marginTop="4dp" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/fatigueCircle"
+            android:layout_below="@+id/thumbCircle"
+            android:layout_alignLeft="@+id/thumbCircle"
+            android:background="@drawable/circle_small"
+            android:layout_marginTop="2dp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            android:text="Stiffness"
+            android:id="@+id/stiffness"
+            android:layout_below="@+id/wristCircle"
+            android:textStyle="italic"
+            android:textSize="10sp"
+            android:layout_alignLeft="@+id/wrist"
+            android:layout_marginTop="4dp" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/stiffnessCircle"
+            android:layout_below="@+id/wristCircle"
+            android:layout_alignLeft="@+id/wristCircle"
+            android:background="@drawable/circle_small"
+            android:layout_marginTop="2dp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            android:text="Overall"
+            android:id="@+id/overall"
+            android:layout_below="@+id/elbowCircle"
+            android:textStyle="italic"
+            android:textSize="10sp"
+            android:layout_alignLeft="@+id/elbow"
+            android:layout_marginTop="4dp" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/overallCircle"
+            android:layout_below="@+id/elbowCircle"
+            android:layout_alignLeft="@+id/elbowCircle"
+            android:background="@drawable/circle_small"
+            android:layout_marginTop="2dp" />
     </RelativeLayout>
 </android.support.v7.widget.CardView>
