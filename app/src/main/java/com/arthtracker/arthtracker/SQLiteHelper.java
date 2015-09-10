@@ -195,7 +195,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
         values.put("thumbs", painDay.getmThumbs());
         values.put("wrists", painDay.getmWrists());
         values.put("elbows", painDay.getmElbows());
-        values.put("shouders", painDay.getmShoulders());
+        values.put("shoulders", painDay.getmShoulders());
         values.put("knees", painDay.getmKnees());
         values.put("ankles", painDay.getmAnkles());
         values.put("fatigue", painDay.getmFatigue());
