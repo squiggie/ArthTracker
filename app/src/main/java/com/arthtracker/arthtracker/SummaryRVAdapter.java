@@ -4,12 +4,10 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,11 +15,14 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.github.pavlospt.CircleView;
+import com.joanzapata.iconify.widget.IconTextView;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
-
-import static android.support.v4.app.ActivityCompat.startActivity;
 
 public class SummaryRVAdapter extends RecyclerView.Adapter<SummaryRVAdapter.PainDayHolder> {
     List<PainDay> painDays;
@@ -266,6 +267,45 @@ public class SummaryRVAdapter extends RecyclerView.Adapter<SummaryRVAdapter.Pain
             painDayHolder.overallCircle.setImageDrawable(myIcon);
 
         }
+
+        //Weather Icon and Text
+        if (painDays.get(i).getmWeather() != null && painDays.get(i).getmWeather() != ""){
+            try {
+                JSONObject json = new JSONObject(painDays.get(i).getmWeather());
+                //Get the instance of JSONArray that contains JSONObjects
+                JSONObject observation = json.optJSONObject("current_observation");
+                String weatherIcon = observation.optString("icon").toString();
+                switch (weatherIcon){
+                    case "clear":
+                        painDayHolder.weatherIcon.setText("{wi_day_sunny}");
+                        break;
+                    case "cloudy":
+                        painDayHolder.weatherIcon.setText("{wi_day_cloudy}");
+                        break;
+                    case "flurries":
+                        painDayHolder.weatherIcon.setText("{wi_day_snow}");
+                        break;
+                    case "hazy":
+                        painDayHolder.weatherIcon.setText("{wi_day_haze}");
+                        break;
+                    case "rain":
+                        painDayHolder.weatherIcon.setText("{wi_day_rain}");
+                        break;
+                    case "sleet":
+                        painDayHolder.weatherIcon.setText("{wi_day_sleet}");
+                        break;
+                    case "thunderstorm":
+                        painDayHolder.weatherIcon.setText("{wi_day_thunderstorm}");
+                        break;
+                    case "fog":
+                        painDayHolder.weatherIcon.setText("{wi_day_fog}");
+                        break;
+                }
+
+                painDayHolder.weatherText.setText(createWeatherText(observation));
+            } catch (JSONException e) {
+            }
+        }
     }
     @Override
     public int getItemCount() {
@@ -275,6 +315,23 @@ public class SummaryRVAdapter extends RecyclerView.Adapter<SummaryRVAdapter.Pain
     public void remove(int position) {
         painDays.remove(position);
         notifyItemRemoved(position);
+    }
+
+    protected String createWeatherText(JSONObject weather){
+        String weatherText = "";
+        String city = "";
+        String temp = weather.optString("temp_f").toString();
+        String humidity = weather.optString("relative_humidity").toString();
+        String pressure = weather.optString("pressure_in").toString() + weather.optString("pressure_trend").toString();;
+        String precip = weather.optString("precip_today_in").toString();
+        String icon = weather.optString("icon").toString();
+
+        JSONObject location = weather.optJSONObject("display_location");
+        city = location.optString("city");
+
+        weatherText = city + " " + temp + "f | " + "Humidity "+ humidity + " | Pressure " + pressure + " | Precip " + precip + " | Icon " + icon;
+
+        return weatherText;
     }
 
     public class PainDayHolder extends RecyclerView.ViewHolder {
@@ -291,6 +348,8 @@ public class SummaryRVAdapter extends RecyclerView.Adapter<SummaryRVAdapter.Pain
         ImageView fatigueCircle;
         ImageView stiffnessCircle;
         ImageView overallCircle;
+        IconTextView weatherIcon;
+        TextView weatherText;
 
 
 
@@ -309,7 +368,9 @@ public class SummaryRVAdapter extends RecyclerView.Adapter<SummaryRVAdapter.Pain
             fatigueCircle = (ImageView)itemView.findViewById(R.id.fatigueCircle);
             stiffnessCircle = (ImageView)itemView.findViewById(R.id.stiffnessCircle);
             overallCircle = (ImageView)itemView.findViewById(R.id.overallCircle);
-
+            weatherIcon = (IconTextView)itemView.findViewById(R.id.weatherIcon);
+            weatherText = (TextView)itemView.findViewById(R.id.weatherText);
         }
     }
 }
+

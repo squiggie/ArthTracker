@@ -1,16 +1,17 @@
 package com.arthtracker.arthtracker;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+
+import com.joanzapata.iconify.Iconify;
+import com.joanzapata.iconify.fonts.WeathericonsModule;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,6 +39,8 @@ public class MainActivity extends ActionBarActivity{
         SummaryRVAdapter adapter = new SummaryRVAdapter(painDays, getApplicationContext());
         rv.setAdapter(adapter);
 
+        //Icons
+        Iconify.with(new WeathericonsModule());
     }
 
     @Override
@@ -60,7 +63,7 @@ public class MainActivity extends ActionBarActivity{
         }
 
         if (id == R.id.graph){
-            startActivity(new Intent(this, Graph.class));
+            startActivity(new Intent(this, GraphActivity.class));
         }
         return super.onOptionsItemSelected(item);
     }
