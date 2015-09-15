@@ -16,7 +16,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Graph"
+            android:name=".GraphActivity"
             android:label="@string/title_activity_graph"
             android:screenOrientation="landscape">
             <meta-data
