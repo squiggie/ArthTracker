@@ -8,7 +8,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
-public class Graph extends ActionBarActivity {
+public class GraphActivity extends ActionBarActivity {
     private Toolbar toolbar;
 
     @Override
@@ -43,7 +43,7 @@ public class Graph extends ActionBarActivity {
         }
 
         if (id == R.id.graph){
-            startActivity(new Intent(this,Graph.class));
+            startActivity(new Intent(this,GraphActivity.class));
         }
 
         if (id ==android.R.id.home){
