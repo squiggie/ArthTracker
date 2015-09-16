@@ -113,8 +113,7 @@ public class DayActivity extends ActionBarActivity implements PainItems.OnFragme
             Calendar c = Calendar.getInstance();
             c.setTimeInMillis(mPainDay.getmDate() * 1000);
             mDatePicker.init(c.get(Calendar.YEAR), c.get(Calendar.MONTH), c.get(Calendar.DAY_OF_MONTH), this);
-            mDatePicker.setMaxDate(mPainDay.getmDate() * 1000);
-            mDatePicker.setMinDate(mPainDay.getmDate() * 1000);
+            mDatePicker.setEnabled(false);
             mchkWeather.setChecked(true);
             mchkWeather.setClickable(false);
         }
