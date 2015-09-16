@@ -17,6 +17,7 @@ import com.github.mikephil.charting.data.LineDataSet;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -39,6 +40,8 @@ public class GraphActivity extends ActionBarActivity {
 
         SQLiteHelper sqlHelper = new SQLiteHelper(this);
         List<PainDay> painDays = sqlHelper.getAllPainDays();
+        //Reverse Order
+        Collections.reverse(painDays);
 
         //Populate Chart
         setData(painDays.size(), 100, painDays);
