@@ -6,23 +6,30 @@ import android.support.v4.app.NavUtils;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import com.github.mikephil.charting.animation.Easing;
 import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.components.Legend;
+import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
+import com.github.mikephil.charting.highlight.Highlight;
+import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
+import com.github.mikephil.charting.utils.ColorTemplate;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class GraphActivity extends ActionBarActivity {
+public class GraphActivity extends ActionBarActivity implements OnChartValueSelectedListener {
     private Toolbar toolbar;
     private LineChart mChart;
+    private List<PainDay> mPainDays;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,13 +45,26 @@ public class GraphActivity extends ActionBarActivity {
         mChart = (LineChart) findViewById(R.id.chart);
 
         SQLiteHelper sqlHelper = new SQLiteHelper(this);
-        List<PainDay> painDays = sqlHelper.getAllPainDays();
+        mPainDays = sqlHelper.getAllPainDays();
 
         //Populate Chart
-        setData(painDays.size(), 100, painDays);
+        setData(mPainDays.size(), 100, mPainDays);
 
         mChart.animateX(2500, Easing.EasingOption.EaseInOutQuart);
         mChart.setDescription("Pain Over Time");
+        mChart.setScaleEnabled(true);
+        mChart.setNoDataTextDescription("You need to provide data for the chart.");
+        //Hide legend
+        Legend legend = mChart.getLegend();
+        legend.setEnabled(false);
+
+        mChart.setOnChartValueSelectedListener(this);
+
+        mChart.setBackgroundColor(Color.WHITE);
+        // enable touch gestures
+        mChart.setTouchEnabled(true);
+        // enable scaling and dragging
+        mChart.setDragEnabled(true);
         mChart.setScaleEnabled(true);
     }
 
@@ -79,7 +99,7 @@ public class GraphActivity extends ActionBarActivity {
     }
 
     private void setData(int count, float range, List<PainDay> painDays) {
-        SimpleDateFormat sdf = new SimpleDateFormat("MMM d, ''yy");
+        SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/''yy");
 
         ArrayList<String> xVals = new ArrayList<String>();
         for (int i = 0; i < count; i++) {
@@ -93,21 +113,18 @@ public class GraphActivity extends ActionBarActivity {
         }
 
         // create a dataset and give it a type
-        LineDataSet set1 = new LineDataSet(yVals, "Date");
-        // set1.setFillAlpha(110);
-        // set1.setFillColor(Color.RED);
+        LineDataSet set1 = new LineDataSet(yVals, "");
 
-        // set the line to be drawn like this "- - - - - -"
-        set1.enableDashedLine(10f, 5f, 0f);
-        set1.setColor(Color.BLACK);
-        set1.setCircleColor(Color.BLACK);
+        set1.setColor(getResources().getColor(R.color.primaryColor));
+        set1.setCircleColor(getResources().getColor(R.color.accentColor));
         set1.setLineWidth(1f);
         set1.setCircleSize(3f);
-        set1.setDrawCircleHole(false);
+        set1.setDrawCircleHole(true);
         set1.setValueTextSize(9f);
         set1.setFillAlpha(65);
-        set1.setFillColor(Color.BLACK);
-//        set1.setDrawFilled(true);
+        set1.setFillColor(getResources().getColor(R.color.accentColor));
+        set1.setHighLightColor(getResources().getColor(R.color.accentColor));
+        set1.setDrawFilled(true);
         // set1.setShader(new LinearGradient(0, 0, 0, mChart.getHeight(),
         // Color.BLACK, Color.WHITE, Shader.TileMode.MIRROR));
 
@@ -119,5 +136,15 @@ public class GraphActivity extends ActionBarActivity {
 
         // set data
         mChart.setData(data);
+    }
+
+    @Override
+    public void onValueSelected(Entry e, int dataSetIndex, Highlight h) {
+
+    }
+
+    @Override
+    public void onNothingSelected() {
+
     }
 }
