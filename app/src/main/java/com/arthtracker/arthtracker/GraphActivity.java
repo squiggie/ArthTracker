@@ -54,6 +54,7 @@ public class GraphActivity extends ActionBarActivity implements OnChartValueSele
         mChart.setDescription("Pain Over Time");
         mChart.setScaleEnabled(true);
         mChart.setNoDataTextDescription("You need to provide data for the chart.");
+        mChart.setVisibleXRange(7,10);
         //Hide legend
         Legend legend = mChart.getLegend();
         legend.setEnabled(false);
