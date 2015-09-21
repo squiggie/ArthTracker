@@ -126,6 +126,7 @@ public class DayActivity extends ActionBarActivity implements PainItems.OnFragme
             mDatePicker.setEnabled(false);
             mchkWeather.setChecked(true);
             mchkWeather.setClickable(false);
+            mchkWeather.setAlpha(.25f);
         }
         else{
             //New PainDay - Set Default Values
