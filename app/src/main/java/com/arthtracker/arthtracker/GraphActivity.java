@@ -1,14 +1,14 @@
 package com.arthtracker.arthtracker;
 
 import android.content.Intent;
-import android.graphics.Color;
+import android.os.Bundle;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.ActionBarActivity;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 
 import com.github.mikephil.charting.animation.Easing;
 import com.github.mikephil.charting.charts.LineChart;
@@ -23,10 +23,11 @@ import com.github.mikephil.charting.utils.ColorTemplate;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
-public class GraphActivity extends ActionBarActivity implements OnChartValueSelectedListener {
+public class GraphActivity extends ActionBarActivity implements com.github.mikephil.charting.listener.OnChartGestureListener {
     private Toolbar toolbar;
     private LineChart mChart;
     private List<PainDay> mPainDays;
@@ -45,6 +46,7 @@ public class GraphActivity extends ActionBarActivity implements OnChartValueSele
         mChart = (LineChart) findViewById(R.id.chart);
 
         SQLiteHelper sqlHelper = new SQLiteHelper(this);
+
         mPainDays = sqlHelper.getAllPainDays();
 
         //Populate Chart
@@ -53,20 +55,11 @@ public class GraphActivity extends ActionBarActivity implements OnChartValueSele
         mChart.animateX(2500, Easing.EasingOption.EaseInOutQuart);
         mChart.setDescription("Pain Over Time");
         mChart.setScaleEnabled(true);
-        mChart.setNoDataTextDescription("You need to provide data for the chart.");
-        mChart.setVisibleXRange(7,10);
-        //Hide legend
-        Legend legend = mChart.getLegend();
-        legend.setEnabled(false);
-
-        mChart.setOnChartValueSelectedListener(this);
-
-        mChart.setBackgroundColor(Color.WHITE);
-        // enable touch gestures
         mChart.setTouchEnabled(true);
-        // enable scaling and dragging
-        mChart.setDragEnabled(true);
-        mChart.setScaleEnabled(true);
+        mChart.setOnChartGestureListener(this);
+        mChart.setPinchZoom(false);
+        mChart.setHorizontalScrollBarEnabled(true);
+        mChart.setVisibleXRange(7,7);
     }
 
     @Override
@@ -114,21 +107,19 @@ public class GraphActivity extends ActionBarActivity implements OnChartValueSele
         }
 
         // create a dataset and give it a type
-        LineDataSet set1 = new LineDataSet(yVals, "");
+        LineDataSet set1 = new LineDataSet(yVals, "Date");
 
-        set1.setColor(getResources().getColor(R.color.primaryColor));
-        set1.setCircleColor(getResources().getColor(R.color.accentColor));
-        set1.setLineWidth(1f);
-        set1.setCircleSize(3f);
-        set1.setDrawCircleHole(true);
+        // set the line to be drawn like this "- - - - - -"
+        set1.enableDashedLine(10f, 5f, 0f);
+        set1.setColor(R.color.accentColor);
+        set1.setCircleColor(R.color.accentColor);
+        set1.setLineWidth(2f);
+        set1.setCircleSize(5f);
+        //set1.setDrawCircleHole(false);
         set1.setValueTextSize(9f);
-        set1.setFillAlpha(65);
-        set1.setFillColor(getResources().getColor(R.color.accentColor));
-        set1.setHighLightColor(getResources().getColor(R.color.accentColor));
+        set1.setFillAlpha(75);
         set1.setDrawFilled(true);
-        // set1.setShader(new LinearGradient(0, 0, 0, mChart.getHeight(),
-        // Color.BLACK, Color.WHITE, Shader.TileMode.MIRROR));
-
+        //set1.setShader(new LinearGradient(0, 0, 0, mChart.getHeight(), Color.BLACK, Color.WHITE, Shader.TileMode.MIRROR));
         ArrayList<LineDataSet> dataSets = new ArrayList<LineDataSet>();
         dataSets.add(set1); // add the datasets
 
@@ -140,12 +131,32 @@ public class GraphActivity extends ActionBarActivity implements OnChartValueSele
     }
 
     @Override
-    public void onValueSelected(Entry e, int dataSetIndex, Highlight h) {
-
+    public void onChartLongPressed(MotionEvent me) {
+        //Log.d("Chart Touched", "Chart Touched");
     }
 
     @Override
-    public void onNothingSelected() {
+    public void onChartDoubleTapped(MotionEvent me) {
+        //Log.d("Chart Touched", "Chart Touched");
+    }
+
+    @Override
+    public void onChartSingleTapped(MotionEvent me) {
+        //Log.d("Chart Touched", "Chart Touched");
+    }
+
+    @Override
+    public void onChartFling(MotionEvent me1, MotionEvent me2, float velocityX, float velocityY) {
+        mChart.moveViewToX(me1.getX()+5);
+    }
+
+    @Override
+    public void onChartScale(MotionEvent me, float scaleX, float scaleY) {
+        //Log.d("Chart Touched", "Chart Touched");
+    }
+
+    @Override
+    public void onChartTranslate(MotionEvent me, float dX, float dY) {
 
     }
 }
