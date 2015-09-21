@@ -21,45 +21,53 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
+import butterknife.Bind;
+import butterknife.ButterKnife;
+
 public class DayActivity extends ActionBarActivity implements PainItems.OnFragmentInteractionListener, SeekBar.OnSeekBarChangeListener, DatePicker.OnDateChangedListener{
-    private Toolbar toolbar;
-    private TextView mtvFingers;
-    private TextView mtvThumbs;
-    private TextView mtvWrists;
-    private TextView mtvShoulders;
-    private TextView mtvKnees;
-    private TextView mtvElbows;
-    private TextView  mtvAnkles;
-    private TextView  mtvFatigue;
-    private TextView  mtvStiffness;
-    private TextView  mtvOverall;
-    private DatePicker  mDatePicker;
-    private TextView  mNotes;
+    @Bind(R.id.app_bar) Toolbar toolbar;
+    @Bind(R.id.tvFingerPainScore) TextView mtvFingers;
+    @Bind(R.id.tvThumbPainScore) TextView mtvThumbs;
+    @Bind(R.id.tvWristPainScore) TextView mtvWrists;
+    @Bind(R.id.tvShoulderPainScore) TextView mtvShoulders;
+    @Bind(R.id.tvKneePainScore) TextView mtvKnees;
+    @Bind(R.id.tvElbowPainScore) TextView mtvElbows;
+    @Bind(R.id.tvAnklePainScore) TextView  mtvAnkles;
+    @Bind(R.id.tvFootPainScore) TextView mtvFeet;
+    @Bind(R.id.tvFatigueScore) TextView  mtvFatigue;
+    @Bind(R.id.tvStiffnessScore) TextView  mtvStiffness;
+    @Bind(R.id.tvOverallScore) TextView  mtvOverall;
+    @Bind(R.id.datePicker) DatePicker  mDatePicker;
+    @Bind(R.id.notes) TextView  mNotes;
+    @Bind(R.id.sbFingerPain) SeekBar msbFingerPain;
+    @Bind(R.id.sbThumbPain) SeekBar msbThumbPain;
+    @Bind(R.id.sbWristPain) SeekBar msbWristPain;
+    @Bind(R.id.sbElbowPain) SeekBar msbElbowPain;
+    @Bind(R.id.sbShoulderPain) SeekBar msbShoulderPain;
+    @Bind(R.id.sbKneePain) SeekBar msbKneePain;
+    @Bind(R.id.sbAnklePain) SeekBar msbAnklePain;
+    @Bind(R.id.sbFootPain) SeekBar msbFootPain;
+    @Bind(R.id.sbFatigue) SeekBar msbFatigue;
+    @Bind(R.id.sbStiffness) SeekBar msbStiffness;
+    @Bind(R.id.sbOverall) SeekBar msbOverall;
+    @Bind(R.id.chkWeather) CheckBox mchkWeather;
+
     private PainDay mPainDay;
-    private SeekBar msbFingerPain;
-    private SeekBar msbThumbPain;
-    private SeekBar msbWristPain;
-    private SeekBar msbElbowPain;
-    private SeekBar msbShoulderPain;
-    private SeekBar msbKneePain;
-    private SeekBar msbAnklePain;
-    private SeekBar msbFatigue;
-    private SeekBar msbStiffness;
-    private SeekBar msbOverall;
-    private CheckBox mchkWeather;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_day);
 
+        ButterKnife.bind(this);
+
         //set toolbar
-        toolbar = (Toolbar) findViewById(R.id.app_bar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         //create objects
+        /*
         mtvFingers = (TextView)findViewById(R.id.tvFingerPainScore);
         mtvThumbs = (TextView)findViewById(R.id.tvThumbPainScore);
         mtvWrists = (TextView)findViewById(R.id.tvWristPainScore);
@@ -83,6 +91,7 @@ public class DayActivity extends ActionBarActivity implements PainItems.OnFragme
         msbStiffness = (SeekBar)findViewById(R.id.sbStiffness);
         msbOverall = (SeekBar)findViewById(R.id.sbOverall);
         mchkWeather = (CheckBox)findViewById(R.id.chkWeather);
+        */
 
         PainDay p = (PainDay)this.getIntent().getSerializableExtra("PainDay");
         if(p!=null){
@@ -107,6 +116,7 @@ public class DayActivity extends ActionBarActivity implements PainItems.OnFragme
             msbKneePain.setProgress(mPainDay.getmKnees());
             msbElbowPain.setProgress(mPainDay.getmElbows());
             msbAnklePain.setProgress(mPainDay.getmAnkles());
+            msbFootPain.setProgress(mPainDay.getmFeet());
             msbFatigue.setProgress(mPainDay.getmFatigue());
             msbStiffness.setProgress(mPainDay.getmStiffness());
             msbOverall.setProgress(mPainDay.getmOverall());
@@ -127,6 +137,7 @@ public class DayActivity extends ActionBarActivity implements PainItems.OnFragme
             mPainDay.setmShoulders(3);
             mPainDay.setmKnees(3);
             mPainDay.setmAnkles(3);
+            mPainDay.setmFeet(3);
             mPainDay.setmFatigue(3);
             mPainDay.setmStiffness(3);
             mPainDay.setmOverall(3);
@@ -153,6 +164,7 @@ public class DayActivity extends ActionBarActivity implements PainItems.OnFragme
         msbShoulderPain.setOnSeekBarChangeListener(this);
         msbKneePain.setOnSeekBarChangeListener(this);
         msbAnklePain.setOnSeekBarChangeListener(this);
+        msbFootPain.setOnSeekBarChangeListener(this);
         msbFatigue.setOnSeekBarChangeListener(this);
         msbStiffness.setOnSeekBarChangeListener(this);
         msbOverall.setOnSeekBarChangeListener(this);
@@ -212,6 +224,7 @@ public class DayActivity extends ActionBarActivity implements PainItems.OnFragme
         mPainDay.setmShoulders(Integer.parseInt(mtvShoulders.getText().toString()));
         mPainDay.setmKnees(Integer.parseInt(mtvKnees.getText().toString()));
         mPainDay.setmAnkles(Integer.parseInt(mtvAnkles.getText().toString()));
+        mPainDay.setmFeet(Integer.parseInt(mtvFeet.getText().toString()));
         mPainDay.setmFatigue(Integer.parseInt(mtvFatigue.getText().toString()));
         mPainDay.setmStiffness(Integer.parseInt(mtvStiffness.getText().toString()));
         mPainDay.setmOverall(Integer.parseInt(mtvOverall.getText().toString()));
@@ -276,6 +289,9 @@ public class DayActivity extends ActionBarActivity implements PainItems.OnFragme
                 break;
             case R.id.sbKneePain:
                 mtvKnees.setText(String.valueOf(progress));
+                break;
+            case R.id.sbFootPain:
+                mtvFeet.setText(String.valueOf(progress));
                 break;
             case R.id.sbAnklePain:
                 mtvAnkles.setText(String.valueOf(progress));

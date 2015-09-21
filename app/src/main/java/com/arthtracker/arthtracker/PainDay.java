@@ -13,6 +13,7 @@ class PainDay implements Serializable {
     private int mShoulders;
     private int mKnees;
     private int mAnkles;
+    private int mFeet;
     private int mFatigue;
     private int mStiffness;
     private int mOverall;
@@ -27,7 +28,13 @@ class PainDay implements Serializable {
     public PainDay (Date date){
 
     }
+    public int getmFeet() {
+        return mFeet;
+    }
 
+    public void setmFeet(int mFeet) {
+        this.mFeet = mFeet;
+    }
     public void setmDate(long mDate) {
         this.mDate = mDate;
     }
@@ -80,9 +87,9 @@ class PainDay implements Serializable {
         //higher score is worse
         //overall has 1.5 weight
         //5*9 + 5*1.5 = 52.5 total points
-        mTotal = mFingers + mThumbs + mWrists + mElbows + mShoulders + mKnees + mAnkles + mFatigue + mStiffness;
+        mTotal = mFingers + mThumbs + mWrists + mElbows + mShoulders + mKnees + mAnkles + mFeet + mFatigue + mStiffness;
         mTotal = mTotal + (mOverall * 1.5);
-        mTotal = mTotal / 52.5;
+        mTotal = mTotal / 57.5;
         mTotal = mTotal * 100; //percentage
         mTotal = (double) Math.round(mTotal);
     }

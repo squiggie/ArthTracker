@@ -24,6 +24,9 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
+import butterknife.Bind;
+import butterknife.ButterKnife;
+
 public class SummaryRVAdapter extends RecyclerView.Adapter<SummaryRVAdapter.PainDayHolder> {
     List<PainDay> painDays;
     Context context;
@@ -41,6 +44,7 @@ public class SummaryRVAdapter extends RecyclerView.Adapter<SummaryRVAdapter.Pain
     @Override
     public PainDayHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
         View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.summary_item, viewGroup, false);
+        ButterKnife.bind(this, v);
         PainDayHolder pvh = new PainDayHolder(v);
         return pvh;
     }
@@ -213,6 +217,24 @@ public class SummaryRVAdapter extends RecyclerView.Adapter<SummaryRVAdapter.Pain
             painDayHolder.ankleCircle.setImageDrawable(myIcon);
 
         }
+        //Feet
+        if (painDays.get(i).getmFeet() <= 1) {
+            Drawable myIcon = context.getResources().getDrawable(R.drawable.circle_small);
+            myIcon.setColorFilter(context.getResources().getColor(R.color.green), PorterDuff.Mode.SRC_ATOP);
+            myIcon.setAlpha(90);
+            painDayHolder.feetCircle.setImageDrawable(myIcon);
+        } else if (painDays.get(i).getmFeet() == 2 || painDays.get(i).getmFeet() == 3) {
+            Drawable myIcon = context.getResources().getDrawable(R.drawable.circle_small);
+            myIcon.setColorFilter(context.getResources().getColor(R.color.yellow), PorterDuff.Mode.SRC_ATOP);
+            myIcon.setAlpha(90);
+            painDayHolder.feetCircle.setImageDrawable(myIcon);
+        } else {
+            Drawable myIcon = context.getResources().getDrawable(R.drawable.circle_small);
+            myIcon.setColorFilter(context.getResources().getColor(R.color.red), PorterDuff.Mode.SRC_ATOP);
+            myIcon.setAlpha(90);
+            painDayHolder.feetCircle.setImageDrawable(myIcon);
+
+        }
         //Fatigue
         if (painDays.get(i).getmFatigue() <= 1) {
             Drawable myIcon = context.getResources().getDrawable(R.drawable.circle_small);
@@ -282,6 +304,9 @@ public class SummaryRVAdapter extends RecyclerView.Adapter<SummaryRVAdapter.Pain
                     case "cloudy":
                         painDayHolder.weatherIcon.setText("{wi_day_cloudy}");
                         break;
+                    case "partlycloudy":
+                        painDayHolder.weatherIcon.setText("{wi_day_cloudy_high}");
+                        break;
                     case "flurries":
                         painDayHolder.weatherIcon.setText("{wi_day_snow}");
                         break;
@@ -335,27 +360,30 @@ public class SummaryRVAdapter extends RecyclerView.Adapter<SummaryRVAdapter.Pain
     }
 
     public class PainDayHolder extends RecyclerView.ViewHolder {
-        CardView cv;
-        TextView date;
-        TextView notes;
-        CircleView circle;
-        ImageView fingerCircle;
-        ImageView thumbCircle;
-        ImageView wristCircle;
-        ImageView elbowCircle;
-        ImageView kneeCircle;
-        ImageView ankleCircle;
-        ImageView fatigueCircle;
-        ImageView stiffnessCircle;
-        ImageView overallCircle;
-        IconTextView weatherIcon;
-        TextView weatherText;
+        @Bind(R.id.cv) CardView cv;
+        @Bind(R.id.date) TextView date;
+        @Bind(R.id.notes) TextView notes;
+        @Bind(R.id.circle) CircleView circle;
+        @Bind(R.id.fingerCircle) ImageView fingerCircle;
+        @Bind(R.id.thumbCircle) ImageView thumbCircle;
+        @Bind(R.id.wristCircle) ImageView wristCircle;
+        @Bind(R.id.elbowCircle) ImageView elbowCircle;
+        @Bind(R.id.kneeCircle) ImageView kneeCircle;
+        @Bind(R.id.ankleCircle) ImageView ankleCircle;
+        @Bind(R.id.feetCircle) ImageView feetCircle;
+        @Bind(R.id.fatigueCircle) ImageView fatigueCircle;
+        @Bind(R.id.stiffnessCircle) ImageView stiffnessCircle;
+        @Bind(R.id.overallCircle) ImageView overallCircle;
+        @Bind(R.id.weatherIcon) IconTextView weatherIcon;
+        @Bind(R.id.weatherText) TextView weatherText;
 
 
 
         PainDayHolder(View itemView) {
             super(itemView);
-            cv = (CardView)itemView.findViewById(R.id.cv);
+            ButterKnife.bind(this, itemView);
+            /*
+            cv = @Bind(R.id.cv);
             date = (TextView)itemView.findViewById(R.id.date);
             circle = (CircleView)itemView.findViewById((R.id.circle));
             notes = (TextView)itemView.findViewById((R.id.notes));
@@ -370,6 +398,7 @@ public class SummaryRVAdapter extends RecyclerView.Adapter<SummaryRVAdapter.Pain
             overallCircle = (ImageView)itemView.findViewById(R.id.overallCircle);
             weatherIcon = (IconTextView)itemView.findViewById(R.id.weatherIcon);
             weatherText = (TextView)itemView.findViewById(R.id.weatherText);
+            */
         }
     }
 }

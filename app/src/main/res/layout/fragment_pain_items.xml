@@ -246,12 +246,45 @@
                 android:paddingBottom="4dp"
                 android:progress="3" />
             <TextView
+                android:id="@+id/tvFootPain"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Foot Pain:"
+                android:padding="8dp"
+                android:layout_below="@+id/sbAnklePain"/>
+
+            <TextView
+                android:id="@+id/tvFootPainScore"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@+id/tvFootPain"
+                android:text="3"
+                android:layout_toRightOf="@+id/tvFootPain"
+                android:padding="8dp" />
+
+            <SeekBar
+                android:id="@+id/sbFootPain"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/tvFootPain"
+                android:longClickable="false"
+                android:max="5"
+                android:paddingLeft="16dp"
+                android:paddingTop="4dp"
+                android:paddingRight="16dp"
+                android:paddingBottom="4dp"
+                android:progress="3" />
+            <TextView
                 android:id="@+id/tvFatigue"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Fatigue:"
                 android:padding="8dp"
-                android:layout_below="@+id/sbAnklePain"/>
+                android:layout_below="@+id/sbFootPain"/>
 
             <TextView
                 android:id="@+id/tvFatigueScore"
