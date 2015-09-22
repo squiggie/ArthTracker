@@ -58,40 +58,12 @@ public class DayActivity extends ActionBarActivity implements PainItems.OnFragme
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_day);
-
         ButterKnife.bind(this);
 
         //set toolbar
         setSupportActionBar(toolbar);
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-        //create objects
-        /*
-        mtvFingers = (TextView)findViewById(R.id.tvFingerPainScore);
-        mtvThumbs = (TextView)findViewById(R.id.tvThumbPainScore);
-        mtvWrists = (TextView)findViewById(R.id.tvWristPainScore);
-        mtvShoulders = (TextView)findViewById(R.id.tvShoulderPainScore);
-        mtvKnees= (TextView)findViewById(R.id.tvKneePainScore);
-        mtvElbows = (TextView)findViewById(R.id.tvElbowPainScore);
-        mtvAnkles= (TextView)findViewById(R.id.tvAnklePainScore);
-        mtvFatigue = (TextView)findViewById(R.id.tvFatigueScore);
-        mtvStiffness= (TextView)findViewById(R.id.tvStiffnessScore);
-        mtvOverall = (TextView)findViewById(R.id.tvOverallScore);
-        mDatePicker = (DatePicker)findViewById(R.id.datePicker);
-        mNotes = (EditText)findViewById(R.id.notes);
-        msbFingerPain = (SeekBar)findViewById(R.id.sbFingerPain);
-        msbThumbPain = (SeekBar)findViewById(R.id.sbThumbPain);
-        msbWristPain = (SeekBar)findViewById(R.id.sbWristPain);
-        msbElbowPain = (SeekBar)findViewById(R.id.sbElbowPain);
-        msbShoulderPain = (SeekBar)findViewById(R.id.sbShoulderPain);
-        msbKneePain = (SeekBar)findViewById(R.id.sbKneePain);
-        msbAnklePain = (SeekBar)findViewById(R.id.sbAnklePain);
-        msbFatigue = (SeekBar)findViewById(R.id.sbFatigue);
-        msbStiffness = (SeekBar)findViewById(R.id.sbStiffness);
-        msbOverall = (SeekBar)findViewById(R.id.sbOverall);
-        mchkWeather = (CheckBox)findViewById(R.id.chkWeather);
-        */
 
         PainDay p = (PainDay)this.getIntent().getSerializableExtra("PainDay");
         if(p!=null){
