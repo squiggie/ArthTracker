@@ -1,6 +1,9 @@
 package com.arthtracker.arthtracker;
 
+import android.app.Activity;
+import android.content.SharedPreferences;
 import android.net.Uri;
+import android.preference.PreferenceManager;
 import android.support.v4.app.NavUtils;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
@@ -15,11 +18,13 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.apache.http.HttpException;
 import org.json.JSONObject;
 
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.Objects;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -50,7 +55,6 @@ public class DayActivity extends ActionBarActivity implements PainItems.OnFragme
     @Bind(R.id.sbFatigue) SeekBar msbFatigue;
     @Bind(R.id.sbStiffness) SeekBar msbStiffness;
     @Bind(R.id.sbOverall) SeekBar msbOverall;
-    @Bind(R.id.chkWeather) CheckBox mchkWeather;
 
     private PainDay mPainDay;
 
@@ -96,9 +100,6 @@ public class DayActivity extends ActionBarActivity implements PainItems.OnFragme
             c.setTimeInMillis(mPainDay.getmDate() * 1000);
             mDatePicker.init(c.get(Calendar.YEAR), c.get(Calendar.MONTH), c.get(Calendar.DAY_OF_MONTH), this);
             mDatePicker.setEnabled(false);
-            mchkWeather.setChecked(true);
-            mchkWeather.setClickable(false);
-            mchkWeather.setAlpha(.25f);
         }
         else{
             //New PainDay - Set Default Values
@@ -126,6 +127,18 @@ public class DayActivity extends ActionBarActivity implements PainItems.OnFragme
         }
 
         setListeners();
+
+        //Get Weather if applicable
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+
+        if (prefs.getBoolean("weather",false) & prefs.getString("zipcode","") != ""){
+            try{
+                checkWeather(prefs.getString("zipcode",""));
+            }
+            catch(Exception e){
+                Toast.makeText(this, "Oops something happend when trying to get weather information. Weather data might not be saved!", Toast.LENGTH_LONG).show();
+            }
+        }
     }
 
     private void setListeners(){
@@ -170,21 +183,20 @@ public class DayActivity extends ActionBarActivity implements PainItems.OnFragme
         return super.onOptionsItemSelected(item);
     }
 
-    public void checkWeather(View v){
-        if (mchkWeather.isChecked()){
-            if (mPainDay.getmWeather() == "" || mPainDay.getmWeather() == null){
-                JSONclient client = new JSONclient(this, l);
-                String url = "http://api.wunderground.com/api/13ff1e7f75830cc2/conditions/q/65619.json";
-                client.execute(url);
-            }
+    public void checkWeather(String zip){
+        if (mPainDay.getmWeather() == "" || mPainDay.getmWeather() == null) {//not existing day
+            JSONclient client = new JSONclient(this, l);
+            String url = "http://api.wunderground.com/api/13ff1e7f75830cc2/conditions/q/" + zip + ".json";
+            client.execute(url);
         }
     }
 
     GetJSONListener l = new GetJSONListener(){
-
         @Override
-        public void onRemoteCallComplete(JSONObject jsonFromNet) {
-            mPainDay.setmWeather(jsonFromNet.toString());
+        public void onRemoteCallComplete(JSONObject jsonFromNet){
+            if (jsonFromNet != null ){
+                mPainDay.setmWeather(jsonFromNet.toString());
+            }
          }
     };
 

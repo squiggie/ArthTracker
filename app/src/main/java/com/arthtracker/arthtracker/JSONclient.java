@@ -14,15 +14,18 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.AsyncTask;
 import android.util.Log;
 
 public class JSONclient extends AsyncTask<String, Void, JSONObject>{
-    ProgressDialog progressDialog ;
     GetJSONListener getJSONListener;
     Context curContext;
+    Exception exceptionToBeThrown;
+
     public JSONclient(Context context, GetJSONListener listener){
         this.getJSONListener = listener;
         curContext = context;
@@ -56,7 +59,7 @@ public class JSONclient extends AsyncTask<String, Void, JSONObject>{
     }
 
 
-    public static JSONObject connect(String url)
+    public JSONObject connect(String url)
     {
         HttpClient httpclient = new DefaultHttpClient();
 
@@ -88,26 +91,21 @@ public class JSONclient extends AsyncTask<String, Void, JSONObject>{
 
 
         } catch (ClientProtocolException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+            exceptionToBeThrown = e;
         } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+            exceptionToBeThrown = e;
         } catch (JSONException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+            exceptionToBeThrown = e;
         }
-
         return null;
     }
     @Override
     public void onPreExecute() {
-        progressDialog = new ProgressDialog(curContext);
-        progressDialog.setMessage("Getting Weather Data. Please wait....");
-        progressDialog.setCancelable(false);
-        progressDialog.setIndeterminate(true);
-        progressDialog.show();
-
+        //progressDialog = new ProgressDialog(curContext);
+        //progressDialog.setMessage("Getting Data. Please wait....");
+        //progressDialog.setCancelable(false);
+        //progressDialog.setIndeterminate(true);
+        //progressDialog.show();
     }
 
     @Override
@@ -117,7 +115,18 @@ public class JSONclient extends AsyncTask<String, Void, JSONObject>{
 
     @Override
     protected void onPostExecute(JSONObject json ) {
-        getJSONListener.onRemoteCallComplete(json);
-        progressDialog.dismiss();
+        if (json != null){
+            getJSONListener.onRemoteCallComplete(json);
+        }
+        else {
+            AlertDialog.Builder builder = new AlertDialog.Builder(curContext);
+            builder.setMessage("Error getting weather data. Weather information may not be saved for today!")
+                .setTitle("Connection Error")
+                .setNeutralButton("OK", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                }).create().show();
+        }
     }
 }
