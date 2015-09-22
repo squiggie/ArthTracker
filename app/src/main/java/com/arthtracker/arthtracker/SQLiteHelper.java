@@ -42,7 +42,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         // SQL statement to create painday table
-        String CREATE_PAINDAY_TABLE = "CREATE TABLE painday ( id INTEGER PRIMARY KEY AUTOINCREMENT, date LONG, fingers INTEGER, thumbs INTEGER, wrists INTEGER, elbows INTEGER, shoulders INTEGER, knees INTEGER, ankles INTEGER, feet INTEGER, fatigue INTEGER, stiffness INTEGER, overall INTEGER, notes TEXT, weather TEXT)";
+        String CREATE_PAINDAY_TABLE = "CREATE TABLE painday ( id INTEGER PRIMARY KEY AUTOINCREMENT, date LONG, fingers INTEGER, thumbs INTEGER, wrists INTEGER, elbows INTEGER, shoulders INTEGER, knees INTEGER, ankles INTEGER, fatigue INTEGER, stiffness INTEGER, overall INTEGER, notes TEXT, weather TEXT, feet INTEGER)";
         db.execSQL(CREATE_PAINDAY_TABLE);
     }
 
